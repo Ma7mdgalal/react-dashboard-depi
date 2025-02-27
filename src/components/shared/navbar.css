@@ -1,0 +1,9 @@
+.custom-hover {
+  color: black;
+  font-weight: bold !important;
+  transition: color 0.2s ease-in-out;
+}
+
+.custom-hover:hover {
+  color: orange !important;
+}
