@@ -7,6 +7,7 @@ import Engagement from "./components/pages/Engagement";
 import Settings from "./components/pages/Setting";
 import Competitor from "./components/pages/Competitor";
 import NotFound from "./components/error404/Notfound";
+import ProfileManage from "./components/pages/ProfileManage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/engagement" element={<Engagement />} />
         <Route path="/competitor" element={<Competitor />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/profileManage" element={<ProfileManage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
