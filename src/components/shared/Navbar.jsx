@@ -1,87 +1,67 @@
-import { Link } from "react-router-dom";
-import "./navbar.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGear } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
+  const [links, setLinks] = useState([
+    {
+      name: "Dashboard",
+      path: "/",
+    },
+    {
+      name: "Analytics",
+      path: "/analytics",
+    },{
+      name:'Posts',
+      path:'posts'
+    },{
+      name:'Engagement',
+      path:'engagement'
+    },
+    {
+      name: "Competitor",
+      path: "/competitor",
+    },
+    {
+      name: "Setting",
+      path: "/setting",
+    },
+  ]);
+
   return (
-    <nav className="navbar navbar-expand-lg">
-      <div className="container">
-        <Link className="navbar-brand" to="/">
-          <img src="/Union.png" alt="site-brand" height={50} />
-        </Link>
+    <nav className="navbar  navbar-expand-lg py-4 px-4">
+      <div className="container-fluid">
         <button
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
           aria-expanded="false"
-          aria-label="Toggle navigation">
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div className="navbar-nav ms-auto d-flex flex-wrap justify-content-end">
-            <Link
-              className="nav-link custom-hover rounded-pill shadow mx-1 my-1 text-center"
-              style={{ padding: "0.5rem 1rem", fontSize: "1.2rem" }}
-              to="/">
-              Dashboard
-            </Link>
-            <Link
-              className="nav-link custom-hover rounded-pill shadow mx-1 my-1 text-center"
-              style={{ padding: "0.5rem 1rem", fontSize: "1.2rem" }}
-              to="/analytics">
-              Analytics
-            </Link>
-            <Link
-              className="nav-link custom-hover rounded-pill shadow mx-1 my-1 text-center"
-              style={{ padding: "0.5rem 1rem", fontSize: "1.2rem" }}
-              to="/posts">
-              Posts
-            </Link>
-            <Link
-              className="nav-link custom-hover rounded-pill shadow mx-1 my-1 text-center"
-              style={{ padding: "0.5rem 1rem", fontSize: "1.2rem" }}
-              to="/engagement">
-              Engagement
-            </Link>
-            <Link
-              className="nav-link custom-hover rounded-pill shadow mx-1 my-1 text-center"
-              style={{ padding: "0.5rem 1rem", fontSize: "1.2rem" }}
-              to="/competitor">
-              Competitor Analysis
-            </Link>
-            <div className="dropdown nav-link custom-hover rounded-pill shadow mx-1 my-1 text-center">
-              <button
-                className="btn"
-                style={{ padding: "0.5rem 1rem", fontSize: "1.2rem" }}
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Settings
-                <span>
-                  <FontAwesomeIcon icon={faGear} className="ms-2" />
-                </span>
-              </button>
-              <ul class="dropdown-menu">
-                <li>
-                  <Link to="/settings" class="dropdown-item" type="button">
-                    Notifications
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/profileManage" class="dropdown-item" type="button">
-                    Profile
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav mx-auto mb-2 gap-4 mb-lg-0 ms-auto text-center py-3 px-5  ">
+            {links.map((link, index) => (
+              <li className="nav-item fw-bold fs-5" key={index}>
+                <NavLink
+                  to={link.path}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "nav-link active rounded-pill bg-white active shadow  px-4 py-2"
+                      : "nav-link rounded-5"
+                  }
+                  aria-current="page"
+                >
+                  {link.name}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </nav>
   );
 }
-
 export default Navbar;
