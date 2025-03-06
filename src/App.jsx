@@ -19,8 +19,8 @@ function App() {
         <Route path="/posts" element={<Posts />} />
         <Route path="/engagement" element={<Engagement />} />
         <Route path="/competitor" element={<Competitor />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/profileManage" element={<ProfileManage />} />
+        <Route path="/settings/notifications" element={<Settings />} />
+        <Route path="settings/profile" element={<ProfileManage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

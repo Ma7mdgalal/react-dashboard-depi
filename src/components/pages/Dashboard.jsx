@@ -1,375 +1,443 @@
 import React, { useState } from "react";
+import myPhoto from "./myPhoto.png";
+import instagramIcon from "../profile-pic-icons/Instagram.svg";
+import facebookIcon from "../profile-pic-icons/Facebook.svg";
+import tiktokIcon from "../profile-pic-icons/Tiktok.svg";
+import linkedinIcon from "../profile-pic-icons/Linkedin.svg";
+import twitterIcon from "../profile-pic-icons/Twitter.svg";
 import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
+  FaFacebookF,
+  FaInstagram,
+  FaTwitter,
+  FaLinkedin,
+  FaTiktok,
+} from "react-icons/fa";
+import { Container, Row, Col, Card, Navbar, Nav } from "react-bootstrap";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  PointElement,
+  LineElement,
+  Title,
   Tooltip,
-  ResponsiveContainer,
-} from "recharts";
-import profileImage from "../../assets/icons/shrek-animated-character-smiling-face-png-5cbkwo8lfn628tyi-5cbkwo8lfn628tyi.png";
+  Legend,
+} from "chart.js";
+import { Bar, Line } from "react-chartjs-2";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-function Dashboard() {
-  // State to track which social media platform is selected
-  const [selectedPlatform, setSelectedPlatform] = useState(null);
+// Register ChartJS components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
-  // Social media card data with trend arrays for mini charts
-  const socialCards = [
+const MainDashboard = () => {
+  const [selectedPlatform, setSelectedPlatform] = useState("facebook");
+  const [stats, setStats] = useState([
     {
-      platform: "facebook",
-      icon: "bi-facebook",
-      color: "#1877F2",
+      id: "likes",
+      icon: "❤",
+      fontAwesome: "fas fa-heart",
+      color: "text-danger",
+      label: "Total likes",
+    },
+    {
+      id: "comments",
+      icon: "💬",
+      fontAwesome: "fas fa-comment",
+      color: "text-secondary",
+      label: "Total comments",
+    },
+    {
+      id: "shares",
+      icon: "🔄",
+      fontAwesome: "fas fa-share-alt",
+      color: "text-info",
+      label: "Total shares",
+    },
+  ]);
+  const [platformIcons] = useState([
+    { name: "instagram", icon: instagramIcon },
+    { name: "facebook", icon: facebookIcon },
+    { name: "twitter", icon: twitterIcon },
+    { name: "linkedin", icon: linkedinIcon },
+    { name: "tiktok", icon: tiktokIcon },
+  ]);
+
+  const platformData = {
+    facebook: {
+      icon: <FaFacebookF />,
+      color: "#4267B2",
+      barData: {
+        labels: [
+          "JANUARY",
+          "FEBRUARY",
+          "MARCH",
+          "APRIL",
+          "MAY",
+          "JUNE",
+          "JULY",
+        ],
+        datasets: [
+          {
+            data: [40, 70, 90, 70, 30, 60, 40],
+            backgroundColor: "#4267B2",
+            borderRadius: 6,
+            borderSkipped: false,
+            barThickness: 20,
+          },
+        ],
+      },
       followers: "280K",
-      stats: {
-        likes: "852k",
-        comments: "1423k",
-        shares: "645k",
-        growth: "+12.3%",
-        monthlyData: [30, 45, 60, 55, 70, 65, 80],
-        likesTrend: [30, 40, 50, 45, 60, 55, 70],
-        commentsTrend: [20, 30, 25, 35, 40, 38, 45],
-        sharesTrend: [15, 20, 18, 22, 30, 28, 35],
-      },
+      likes: "1245k",
+      comments: "2312k",
+      shares: "1245k",
+      growth: "+19.9%",
     },
-    {
-      platform: "instagram",
-      icon: "bi-instagram",
-      color: "#E4405F",
+    instagram: {
+      icon: <FaInstagram />,
+      color: "#4488",
+      barData: {
+        labels: [
+          "JANUARY",
+          "FEBRUARY",
+          "MARCH",
+          "APRIL",
+          "MAY",
+          "JUNE",
+          "JULY",
+        ],
+        datasets: [
+          {
+            data: [60, 80, 100, 80, 50, 70, 60],
+            backgroundColor: "#E1306C",
+            borderRadius: 6,
+            borderSkipped: false,
+            barThickness: 20,
+          },
+        ],
+      },
       followers: "680K",
-      stats: {
-        likes: "1245k",
-        comments: "2312k",
-        shares: "1245k",
-        growth: "+19.9%",
-        monthlyData: [40, 65, 75, 60, 65, 70, 85],
-        likesTrend: [35, 45, 55, 50, 65, 60, 75],
-        commentsTrend: [25, 35, 30, 40, 45, 42, 50],
-        sharesTrend: [20, 25, 22, 28, 32, 30, 38],
-      },
+      likes: "2345k",
+      comments: "3456k",
+      shares: "2345k",
+      growth: "+25.5%",
     },
-    {
-      platform: "twitter",
-      icon: "bi-twitter",
+    twitter: {
+      icon: <FaTwitter />,
       color: "#1DA1F2",
+      barData: {
+        labels: [
+          "JANUARY",
+          "FEBRUARY",
+          "MARCH",
+          "APRIL",
+          "MAY",
+          "JUNE",
+          "JULY",
+        ],
+        datasets: [
+          {
+            data: [20, 40, 60, 40, 20, 50, 30],
+            backgroundColor: "#1DA1F2",
+            borderRadius: 6,
+            borderSkipped: false,
+            barThickness: 20,
+          },
+        ],
+      },
       followers: "50K",
-      stats: {
-        likes: "345k",
-        comments: "521k",
-        shares: "822k",
-        growth: "+8.7%",
-        monthlyData: [20, 35, 30, 45, 40, 50, 45],
-        likesTrend: [15, 25, 20, 30, 25, 35, 30],
-        commentsTrend: [10, 15, 12, 18, 14, 20, 16],
-        sharesTrend: [5, 10, 8, 12, 10, 15, 12],
-      },
+      likes: "345k",
+      comments: "456k",
+      shares: "345k",
+      growth: "+10.2%",
     },
-    {
-      platform: "linkedin",
-      icon: "bi-linkedin",
-      color: "#0A66C2",
+    linkedin: {
+      icon: <FaLinkedin />,
+      color: "#0077B5",
+      barData: {
+        labels: [
+          "JANUARY",
+          "FEBRUARY",
+          "MARCH",
+          "APRIL",
+          "MAY",
+          "JUNE",
+          "JULY",
+        ],
+        datasets: [
+          {
+            data: [30, 50, 70, 50, 30, 60, 40],
+            backgroundColor: "#0077B5",
+            borderRadius: 6,
+            borderSkipped: false,
+            barThickness: 20,
+          },
+        ],
+      },
       followers: "100K",
-      stats: {
-        likes: "456k",
-        comments: "312k",
-        shares: "189k",
-        growth: "+15.2%",
-        monthlyData: [25, 40, 35, 50, 45, 55, 60],
-        likesTrend: [20, 30, 25, 35, 30, 40, 35],
-        commentsTrend: [15, 20, 18, 25, 22, 28, 30],
-        sharesTrend: [10, 15, 12, 18, 16, 20, 22],
-      },
+      likes: "456k",
+      comments: "567k",
+      shares: "456k",
+      growth: "+15.3%",
     },
-    {
-      platform: "tiktok",
-      icon: "bi-tiktok",
+    tiktok: {
+      icon: <FaTiktok />,
       color: "#000000",
+      barData: {
+        labels: [
+          "JANUARY",
+          "FEBRUARY",
+          "MARCH",
+          "APRIL",
+          "MAY",
+          "JUNE",
+          "JULY",
+        ],
+        datasets: [
+          {
+            data: [100, 150, 200, 150, 100, 180, 120],
+            backgroundColor: "#000000",
+            borderRadius: 6,
+            borderSkipped: false,
+            barThickness: 20,
+          },
+        ],
+      },
       followers: "1.2M",
-      stats: {
-        likes: "2145k",
-        comments: "1845k",
-        shares: "3254k",
-        growth: "+23.8%",
-        monthlyData: [50, 80, 95, 85, 90, 100, 110],
-        likesTrend: [45, 70, 85, 75, 80, 90, 100],
-        commentsTrend: [35, 55, 65, 60, 62, 70, 80],
-        sharesTrend: [25, 40, 50, 45, 48, 55, 65],
+      likes: "5678k",
+      comments: "6789k",
+      shares: "5678k",
+      growth: "+30.7%",
+    },
+  };
+
+  const { barData, followers, likes, comments, shares, growth } =
+    platformData[selectedPlatform];
+
+  const createLineData = () => ({
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    datasets: [
+      {
+        data: [30, 60, 40, 70, 50, 65],
+        borderColor: "#FFC107",
+        backgroundColor: "transparent",
+        tension: 0.4,
+        pointRadius: 0,
+        borderWidth: 2,
+      },
+    ],
+  });
+
+  const barOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        enabled: true,
       },
     },
-  ];
-
-  const months = [
-    "JANUARY",
-    "FEBRUARY",
-    "MARCH",
-    "APRIL",
-    "MAY",
-    "JUNE",
-    "JULY",
-  ];
-
-  const handleCardClick = (platform) => {
-    setSelectedPlatform(platform);
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+      },
+      y: {
+        display: false,
+        grid: {
+          display: false,
+        },
+      },
+    },
+    maintainAspectRatio: false,
   };
 
-  // Helper function for generating mini chart paths (for likes, comments, shares)
-  const generateMiniChartPath = (data, width = 80, height = 30) => {
-    if (!data || data.length === 0) return "";
-    const maxData = Math.max(...data);
-    const minData = Math.min(...data);
-    const range = maxData - minData || 1;
-    const step = width / (data.length - 1);
-    let d = "";
-    data.forEach((point, idx) => {
-      const x = idx * step;
-      // Invert y because SVG's origin is at the top left.
-      const y = height - ((point - minData) / range) * height;
-      d += idx === 0 ? `M${x},${y}` : ` L${x},${y}`;
-    });
-    return d;
+  const lineOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        enabled: false,
+      },
+    },
+    scales: {
+      x: {
+        display: false,
+      },
+      y: {
+        display: false,
+      },
+    },
+    elements: {
+      point: {
+        radius: 0,
+      },
+    },
+    maintainAspectRatio: false,
   };
-
-  // Extract the current card once to avoid repeated lookups.
-  const currentCard = selectedPlatform
-    ? socialCards.find((card) => card.platform === selectedPlatform)
-    : null;
-
-  // Prepare data for the monthly chart using Recharts.
-  // It combines the months and the monthlyData into an array of objects.
-  const chartData = currentCard
-    ? months.map((month, idx) => ({
-        month,
-        value: currentCard.stats.monthlyData[idx],
-      }))
-    : [];
-
   return (
-    <>
-      <div className="container py-5">
-        {/* Social Media Cards */}
-        <div className="row justify-content-center g-4 mb-5">
-          {socialCards.map((card, index) => (
-            <div key={index} className="col-6 col-md-4 col-lg-2">
-              <div
-                className={`card shadow-lg h-100 ${
-                  selectedPlatform === card.platform
-                    ? "border-3 border-primary"
-                    : ""
-                }`}
-                style={{
-                  borderRadius: "10px",
-                  backgroundColor: "#ffffff",
-                  minHeight: "180px",
-                  cursor: "pointer",
-                  transition: "transform 0.2s",
-                }}
-                onClick={() => handleCardClick(card.platform)}
-                onMouseOver={(e) =>
-                  (e.currentTarget.style.transform = "scale(1.05)")
-                }
-                onMouseOut={(e) =>
-                  (e.currentTarget.style.transform = "scale(1)")
-                }
-              >
-                <div className="card-body p-4 d-flex flex-column">
-                  <div className="mb-auto">
-                    <i
-                      className={`bi ${card.icon} fs-1`}
-                      style={{ color: card.color }}
-                    ></i>
-                  </div>
-                  <div className="mt-auto">
-                    <h2 className="card-title fw-bold mb-0">
-                      {card.followers}
-                    </h2>
-                    <p className="text-secondary mb-0">Followers</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Stats Dashboard - Appears when a platform is selected */}
-        {selectedPlatform && currentCard && (
-          <div className="row">
-            <div className="col-12">
-              <div className="card shadow-lg">
-                <div className="card-body p-4">
-                  <div className="row">
-                    {/* Left Side - Monthly Bar Chart using Recharts */}
-                    <div className="col-md-6">
-                      <h4 className="mb-4">
-                        {selectedPlatform.charAt(0).toUpperCase() +
-                          selectedPlatform.slice(1)}{" "}
-                        Monthly Data
-                      </h4>
-                      <ResponsiveContainer width="100%" height={250}>
-                        <BarChart data={chartData}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="month" tick={{ fontSize: 10 }} />
-                          <YAxis />
-                          <Tooltip />
-                          <Bar dataKey="value" fill={currentCard.color} />
-                        </BarChart>
-                      </ResponsiveContainer>
+    <div className="min-vh-100">
+      <Container fluid className="py-5">
+        {/* Social Media Platforms */}
+        <Row className="mb-4">
+          <Col>
+            <div className="d-flex flex-wrap justify-content-xl-center gap-3 justify-content-center">
+              {Object.entries(platformData).map(([platform, data]) => (
+                <Card
+                  key={platform}
+                  className={`social-card border-0 rounded-4 mb-3 ${
+                    selectedPlatform === platform ? "active-card" : ""
+                  }`}
+                  style={{ width: "19%", minWidth: "270px", padding: "20px" }}
+                  onClick={() => setSelectedPlatform(platform)}
+                >
+                  <Card.Body className="">
+                    <div
+                      className="mb-4 text-center text-md-start"
+                      style={{ fontSize: "3.5rem", color: data.color }}
+                    >
+                      {data.icon}
                     </div>
-
-                    {/* Right Side - Engagement Stats and Mini Charts */}
-                    <div className="col-md-6">
-                      <div className="row">
-                        <div className="col-md-8">
-                          {/* Total Likes */}
-                          <div className="mb-3 card shadow-sm">
-                            <div className="card-body p-3 d-flex align-items-center">
-                              <div
-                                className="me-3 rounded-circle d-flex align-items-center justify-content-center"
-                                style={{
-                                  width: "40px",
-                                  height: "40px",
-                                  backgroundColor: "#ffebee",
-                                }}
-                              >
-                                <i className="bi bi-heart-fill text-danger"></i>
-                              </div>
-                              <div>
-                                <h6 className="mb-0">Total likes</h6>
-                                <h4 className="mb-0">
-                                  {currentCard.stats.likes}
-                                </h4>
-                              </div>
-                              <div className="ms-auto">
-                                <svg width="80" height="30" viewBox="0 0 80 30">
-                                  <path
-                                    d={generateMiniChartPath(
-                                      currentCard.stats.likesTrend
-                                    )}
-                                    fill="none"
-                                    stroke="#ff6b6b"
-                                    strokeWidth="2"
-                                  />
-                                </svg>
-                              </div>
+                    <h2
+                      className="fw-bold   mb-1"
+                      style={{ fontSize: "3.5rem" }}
+                    >
+                      {data.followers}
+                    </h2>
+                    <p className="text-muted fs-3">Followers</p>
+                  </Card.Body>
+                </Card>
+              ))}
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Card className="shadow border-0  rounded-5 p-4">
+              <Card.Body className="py-5 px-lg-4 px-1">
+                <Row className="gap-4">
+                  {/* Followers Chart */}
+                  <Col
+                    md={12}
+                    lg={5}
+                    className="shadow p-4 rounded-4 order-3 order-lg-0"
+                  >
+                    <h5 className="mb-4 fs-2">
+                      {selectedPlatform.charAt(0).toUpperCase() +
+                        selectedPlatform.slice(1)}{" "}
+                      Followers
+                    </h5>
+                    <div style={{ height: "270px" }}>
+                      <Bar data={barData} options={barOptions} />
+                    </div>
+                  </Col>
+                  {/* Engagement Metrics */}
+                  <Col md={8} lg={4} className="mx-auto order-1 order-lg-0">
+                    <div className="d-flex flex-column  h-100  justify-content-between">
+                      {stats.map((item) => (
+                        <Card
+                          key={item.id}
+                          className="shadow border-0 rounded-4 py-2 mb-3"
+                        >
+                          <Card.Body className="p-3 d-flex align-items-center">
+                            {/* Icon */}
+                            <div
+                              className={`me-3 ${item.color}`}
+                              style={{ fontSize: "1.5rem" }}
+                            >
+                              <span className="fs-2">{item.icon}</span>
                             </div>
-                          </div>
-
-                          {/* Total Comments */}
-                          <div className="mb-3 card shadow-sm">
-                            <div className="card-body p-3 d-flex align-items-center">
-                              <div
-                                className="me-3 rounded-circle d-flex align-items-center justify-content-center"
-                                style={{
-                                  width: "40px",
-                                  height: "40px",
-                                  backgroundColor: "#e3f2fd",
-                                }}
-                              >
-                                <i className="bi bi-chat-fill text-primary"></i>
-                              </div>
-                              <div>
-                                <h6 className="mb-0">Total comments</h6>
-                                <h4 className="mb-0">
-                                  {currentCard.stats.comments}
-                                </h4>
-                              </div>
-                              <div className="ms-auto">
-                                <svg width="80" height="30" viewBox="0 0 80 30">
-                                  <path
-                                    d={generateMiniChartPath(
-                                      currentCard.stats.commentsTrend
-                                    )}
-                                    fill="none"
-                                    stroke="#4caf50"
-                                    strokeWidth="2"
-                                  />
-                                </svg>
-                              </div>
+                            {/* Label & Count */}
+                            <div className="flex-grow-1">
+                              <h6 className="mb-0 fs-4">{item.label}</h6>
+                              <h5 className="fw-bold mb-0 fs-5">
+                                {item.id === "shares"
+                                  ? shares
+                                  : item.id === "likes"
+                                  ? likes
+                                  : item.id === "comments"
+                                  ? comments
+                                  : ""}
+                              </h5>
                             </div>
-                          </div>
-
-                          {/* Total Shares */}
-                          <div className="mb-3 card shadow-sm">
-                            <div className="card-body p-3 d-flex align-items-center">
-                              <div
-                                className="me-3 rounded-circle d-flex align-items-center justify-content-center"
-                                style={{
-                                  width: "40px",
-                                  height: "40px",
-                                  backgroundColor: "#e8eaf6",
-                                }}
-                              >
-                                <i className="bi bi-share-fill text-indigo"></i>
-                              </div>
-                              <div>
-                                <h6 className="mb-0">Total shares</h6>
-                                <h4 className="mb-0">
-                                  {currentCard.stats.shares}
-                                </h4>
-                              </div>
-                              <div className="ms-auto">
-                                <svg width="80" height="30" viewBox="0 0 80 30">
-                                  <path
-                                    d={generateMiniChartPath(
-                                      currentCard.stats.sharesTrend
-                                    )}
-                                    fill="none"
-                                    stroke="#3f51b5"
-                                    strokeWidth="2"
-                                  />
-                                </svg>
-                              </div>
+                            {/* Chart */}
+                            <div style={{ width: "80px", height: "30px" }}>
+                              <Line
+                                data={createLineData()}
+                                options={lineOptions}
+                              />
                             </div>
-                          </div>
+                          </Card.Body>
+                        </Card>
+                      ))}
+                    </div>
+                  </Col>
+                  {/* Profile Section */}
+                  <Col md={3} lg={2} className="mx-auto">
+                    <div className="d-flex flex-column align-items-center justify-content-center h-100">
+                      <div className="position-relative mb-3">
+                        <div
+                          style={{
+                            width: "270px",
+                            height: "270px",
+                            borderRadius: "50%",
+                            border: "5px solid #FFC107",
+                            overflow: "hidden",
+                          }}
+                        >
+                          <img
+                            src={myPhoto}
+                            alt="Profile"
+                            className="img-fluid"
+                            style={{
+                              objectFit: "cover",
+                              width: "100%",
+                              height: "100%",
+                            }}
+                          />
                         </div>
-
-                        {/* Profile Image Section */}
-                        <div className="col-md-4">
-                          <div className="text-center">
-                            <div className="position-relative d-inline-block mb-2">
-                              <div
-                                className="rounded-circle overflow-hidden"
+                        <div>
+                          {platformIcons.map((platform) =>
+                            selectedPlatform === platform.name ? (
+                              <img
+                                key={platform.name}
                                 style={{
-                                  width: "120px",
-                                  height: "120px",
-                                  border: "3px solid white",
-                                  boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+                                  position: "absolute",
+                                  bottom: "0",
+                                  left: "0",
+                                  width: "75px",
+                                  height: "75px",
                                 }}
-                              >
-                                <img
-                                  src={profileImage}
-                                  width={100}
-                                  height={110}
-                                  alt="Profile"
-                                  className=""
-                                />
-                              </div>
-                              <div className="position-absolute bottom-0 end-0 bg-white rounded-circle p-1 shadow">
-                                <i
-                                  className={`bi ${currentCard.icon}`}
-                                  style={{
-                                    color: currentCard.color,
-                                    fontSize: "1.5rem",
-                                  }}
-                                ></i>
-                              </div>
-                            </div>
-                            <div className="text-success fw-bold mt-2">
-                              {currentCard.stats.growth}
-                            </div>
-                          </div>
+                                src={platform.icon}
+                                alt={platform.name}
+                              />
+                            ) : null
+                          )}
                         </div>
                       </div>
+                      <h4 className="text-success fw-bold">{growth}</h4>
                     </div>
-                    {/* End Right Side */}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    </>
+                  </Col>
+                </Row>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
-}
-
-export default Dashboard;
+};
+export default MainDashboard;
