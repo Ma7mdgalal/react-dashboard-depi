@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import myPhoto from "./myPhoto.png";
-import instagramIcon from "../profile-pic-icons/Instagram.svg";
-import facebookIcon from "../profile-pic-icons/Facebook.svg";
-import tiktokIcon from "../profile-pic-icons/Tiktok.svg";
-import linkedinIcon from "../profile-pic-icons/Linkedin.svg";
-import twitterIcon from "../profile-pic-icons/Twitter.svg";
+import instagramIcon from "../project-assets/Instagram.png";
+import facebookIcon from "../project-assets/Facebook.png";
+import tiktokIcon from "../project-assets/Tiktok.png";
+import linkedinIcon from "../project-assets/Linkedin.png";
+import twitterIcon from "../project-assets/Twitter.png";
 import {
   FaFacebookF,
   FaInstagram,
@@ -301,19 +301,19 @@ const MainDashboard = () => {
                   className={`social-card border-0 rounded-4 mb-3 ${
                     selectedPlatform === platform ? "active-card" : ""
                   }`}
-                  style={{ width: "19%", minWidth: "270px", padding: "20px" }}
+                  style={{ width: "19%", minWidth: "300px", padding: "20px" }}
                   onClick={() => setSelectedPlatform(platform)}
                 >
                   <Card.Body className="">
                     <div
                       className="mb-4 text-center text-md-start"
-                      style={{ fontSize: "3.5rem", color: data.color }}
+                      style={{ fontSize: "5rem", color: data.color }}
                     >
                       {data.icon}
                     </div>
                     <h2
                       className="fw-bold   mb-1"
-                      style={{ fontSize: "3.5rem" }}
+                      style={{ fontSize: "3.7rem" }}
                     >
                       {data.followers}
                     </h2>
@@ -418,8 +418,8 @@ const MainDashboard = () => {
                                   position: "absolute",
                                   bottom: "0",
                                   left: "0",
-                                  width: "75px",
-                                  height: "75px",
+                                  width: "63px",
+                                  height: "83px",
                                 }}
                                 src={platform.icon}
                                 alt={platform.name}
