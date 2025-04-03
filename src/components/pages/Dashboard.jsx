@@ -1,10 +1,5 @@
 import React, { useState } from "react";
 import myPhoto from "./myPhoto.png";
-import instagramIcon from "../profile-pic-icons/Instagram.svg";
-import facebookIcon from "../profile-pic-icons/Facebook.svg";
-import tiktokIcon from "../profile-pic-icons/Tiktok.svg";
-import linkedinIcon from "../profile-pic-icons/Linkedin.svg";
-import twitterIcon from "../profile-pic-icons/Twitter.svg";
 import {
   FaFacebookF,
   FaInstagram,
@@ -47,29 +42,22 @@ const MainDashboard = () => {
       icon: "❤",
       fontAwesome: "fas fa-heart",
       color: "text-danger",
-      label: "Total likes",
+      label: "Total Likes",
     },
     {
       id: "comments",
       icon: "💬",
       fontAwesome: "fas fa-comment",
       color: "text-secondary",
-      label: "Total comments",
+      label: "Total Comments",
     },
     {
       id: "shares",
       icon: "🔄",
       fontAwesome: "fas fa-share-alt",
       color: "text-info",
-      label: "Total shares",
+      label: "Total Shares",
     },
-  ]);
-  const [platformIcons] = useState([
-    { name: "instagram", icon: instagramIcon },
-    { name: "facebook", icon: facebookIcon },
-    { name: "twitter", icon: twitterIcon },
-    { name: "linkedin", icon: linkedinIcon },
-    { name: "tiktok", icon: tiktokIcon },
   ]);
 
   const platformData = {
@@ -97,9 +85,9 @@ const MainDashboard = () => {
         ],
       },
       followers: "280K",
-      likes: "1245k",
-      comments: "2312k",
-      shares: "1245k",
+      likes: "124k",
+      comments: "231k",
+      shares: "124k",
       growth: "+19.9%",
     },
     instagram: {
@@ -126,9 +114,9 @@ const MainDashboard = () => {
         ],
       },
       followers: "680K",
-      likes: "2345k",
-      comments: "3456k",
-      shares: "2345k",
+      likes: "234k",
+      comments: "345k",
+      shares: "234k",
       growth: "+25.5%",
     },
     twitter: {
@@ -294,30 +282,33 @@ const MainDashboard = () => {
         {/* Social Media Platforms */}
         <Row className="mb-4">
           <Col>
-            <div className="d-flex flex-wrap justify-content-xl-center gap-3 justify-content-center">
+            <div className="d-flex flex-wrap gap-5 justify-content-center ">
               {Object.entries(platformData).map(([platform, data]) => (
                 <Card
                   key={platform}
-                  className={`social-card border-0 rounded-4 mb-3 ${
+                  className={`social-card border-0 rounded-4 mb-5 ${
                     selectedPlatform === platform ? "active-card" : ""
-                  }`}
-                  style={{ width: "19%", minWidth: "270px", padding: "20px" }}
+                  } text-center`}
+                  style={{
+                    width: "17%",
+                    minWidth: "20rem",
+                  }}
                   onClick={() => setSelectedPlatform(platform)}
                 >
                   <Card.Body className="">
                     <div
-                      className="mb-4 text-center text-md-start"
-                      style={{ fontSize: "3.5rem", color: data.color }}
+                      className="mb-4 text-center "
+                      style={{ fontSize: "3rem", color: data.color }}
                     >
                       {data.icon}
                     </div>
                     <h2
-                      className="fw-bold   mb-1"
-                      style={{ fontSize: "3.5rem" }}
+                      className="fw-medium text-center  mb-1"
+                      style={{ fontSize: "3rem" }}
                     >
                       {data.followers}
                     </h2>
-                    <p className="text-muted fs-3">Followers</p>
+                    <p className="text-muted fs-4">Followers</p>
                   </Card.Body>
                 </Card>
               ))}
@@ -326,7 +317,7 @@ const MainDashboard = () => {
         </Row>
         <Row>
           <Col>
-            <Card className="shadow border-0  rounded-5 p-4">
+            <Card className="shadow border-0  rounded-5 pt-4">
               <Card.Body className="py-5 px-lg-4 px-1">
                 <Row className="gap-4">
                   {/* Followers Chart */}
@@ -340,30 +331,28 @@ const MainDashboard = () => {
                         selectedPlatform.slice(1)}{" "}
                       Followers
                     </h5>
-                    <div style={{ height: "270px" }}>
+                    <div style={{ height: "15rem" }}>
                       <Bar data={barData} options={barOptions} />
                     </div>
                   </Col>
                   {/* Engagement Metrics */}
                   <Col md={8} lg={4} className="mx-auto order-1 order-lg-0">
-                    <div className="d-flex flex-column  h-100  justify-content-between">
+                    <div className="d-flex flex-column h-100 justify-content-between">
                       {stats.map((item) => (
                         <Card
                           key={item.id}
-                          className="shadow border-0 rounded-4 py-2 mb-3"
+                          className="shadow rounded-4 py-2 mb-3 "
                         >
-                          <Card.Body className="p-3 d-flex align-items-center">
+                          <Card.Body className="p-3 d-flex align-items-center ">
                             {/* Icon */}
-                            <div
-                              className={`me-3 ${item.color}`}
-                              style={{ fontSize: "1.5rem" }}
-                            >
+                            <div className={`me-3 ${item.color}`}>
                               <span className="fs-2">{item.icon}</span>
                             </div>
+
                             {/* Label & Count */}
                             <div className="flex-grow-1">
-                              <h6 className="mb-0 fs-4">{item.label}</h6>
-                              <h5 className="fw-bold mb-0 fs-5">
+                              <h6 className="mb-0 fs-5">{item.label}</h6>
+                              <h5 className=" mb-0 fs-6 fw-medium text-muted">
                                 {item.id === "shares"
                                   ? shares
                                   : item.id === "likes"
@@ -373,8 +362,9 @@ const MainDashboard = () => {
                                   : ""}
                               </h5>
                             </div>
+
                             {/* Chart */}
-                            <div style={{ width: "80px", height: "30px" }}>
+                            <div style={{ width: "4rem", height: "2.5rem" }}>
                               <Line
                                 data={createLineData()}
                                 options={lineOptions}
@@ -388,13 +378,13 @@ const MainDashboard = () => {
                   {/* Profile Section */}
                   <Col md={3} lg={2} className="mx-auto">
                     <div className="d-flex flex-column align-items-center justify-content-center h-100">
-                      <div className="position-relative mb-3">
+                      <div className="position-relative">
                         <div
                           style={{
-                            width: "270px",
-                            height: "270px",
+                            width: "12rem",
+                            height: "12rem",
+                            border: "0.3rem solid #FFC107",
                             borderRadius: "50%",
-                            border: "5px solid #FFC107",
                             overflow: "hidden",
                           }}
                         >
@@ -403,32 +393,15 @@ const MainDashboard = () => {
                             alt="Profile"
                             className="img-fluid"
                             style={{
+                              width: "12rem",
+                              height: "12rem",
                               objectFit: "cover",
-                              width: "100%",
-                              height: "100%",
                             }}
                           />
                         </div>
-                        <div>
-                          {platformIcons.map((platform) =>
-                            selectedPlatform === platform.name ? (
-                              <img
-                                key={platform.name}
-                                style={{
-                                  position: "absolute",
-                                  bottom: "0",
-                                  left: "0",
-                                  width: "75px",
-                                  height: "75px",
-                                }}
-                                src={platform.icon}
-                                alt={platform.name}
-                              />
-                            ) : null
-                          )}
-                        </div>
+                        <div></div>
                       </div>
-                      <h4 className="text-success fw-bold">{growth}</h4>
+                      <h4 className="pt-3 text-success fw-bold">{growth}</h4>
                     </div>
                   </Col>
                 </Row>

@@ -5,7 +5,7 @@ function Footer() {
                 Made With &copy Warlock 
             </div>
         </footer>
-     );
+    );
 }
 
 export default Footer;
