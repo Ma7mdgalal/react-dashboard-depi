@@ -1,5 +1,5 @@
 "use client";
-
+import Photo from "./myPhoto.png"
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Dropdown, Card, Form, InputGroup } from "react-bootstrap";
@@ -337,7 +337,7 @@ function Posts() {
                             <div className="d-flex">
                               <div className="me-2">
                                 <img
-                                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-2M8YTTzKwc9dsiWNgaciwG9C5LsDNI.png"
+                                  src={Photo}
                                   alt="Profile"
                                   className="rounded-circle"
                                   style={{
