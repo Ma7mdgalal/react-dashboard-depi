@@ -151,7 +151,7 @@ const ProfileManage = () => {
                 className="border-0 shadow-sm rounded-4 h-100"
                 style={{
                   background:
-                    "linear-gradient(to bottom,rgba(255, 200, 50, 0.18) 50%, rgb(255, 255, 255) 65%)",
+                    "linear-gradient(to bottom,rgba(255, 187, 0, 0.19) 50%, rgb(255, 255, 255) 65%)",
                 }}
               >
                 <Card.Body className="text-center p-3 p-md-4">

@@ -3,7 +3,6 @@ import Navbar from "./components/shared/Navbar";
 import Dashboard from "./components/pages/Dashboard";
 import Analytics from "./components/pages/Analytics";
 import Posts from "./components/pages/Posts";
-import Engagement from "./components/pages/Engagement";
 import Settings from "./components/pages/Setting";
 import Competitor from "./components/pages/Competitor";
 import NotFound from "./components/error404/Notfound";
@@ -17,7 +16,6 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/posts" element={<Posts />} />
-        <Route path="/engagement" element={<Engagement />} />
         <Route path="/competitor" element={<Competitor />} />
         <Route path="/settings/notifications" element={<Settings />} />
         <Route path="settings/profile" element={<ProfileManage />} />

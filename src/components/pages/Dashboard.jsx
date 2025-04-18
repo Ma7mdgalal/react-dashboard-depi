@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import myPhoto from "./myPhoto.png";
+import instagramIcon from "../../assets/images/instagram.png";
+import facebookIcon from "../../assets/images/facebook.png";
+import tiktokIcon from "../../assets/images/tiktok.png";
+import linkedinIcon from "../../assets/images/linkedin.png";
+import twitterIcon from "../../assets/images/twitter.png";
 import {
   FaFacebookF,
   FaInstagram,
@@ -276,6 +281,13 @@ const MainDashboard = () => {
     },
     maintainAspectRatio: false,
   };
+  const [platformIcons] = useState([
+    { name: "instagram", icon: instagramIcon },
+    { name: "facebook", icon: facebookIcon },
+    { name: "twitter", icon: twitterIcon },
+    { name: "linkedin", icon: linkedinIcon },
+    { name: "tiktok", icon: tiktokIcon },
+  ]);
   return (
     <div className="min-vh-100">
       <Container fluid className="py-5">
@@ -399,7 +411,24 @@ const MainDashboard = () => {
                             }}
                           />
                         </div>
-                        <div></div>
+                        <div>
+                          {platformIcons.map((platform) =>
+                            selectedPlatform === platform.name ? (
+                              <img
+                                key={platform.name}
+                                style={{
+                                  position: "absolute",
+                                  bottom: "0",
+                                  left: "0",
+                                  width: "63px",
+                                  height: "83px",
+                                }}
+                                src={platform.icon}
+                                alt={platform.name}
+                              />
+                            ) : null
+                          )}
+                        </div>{" "}
                       </div>
                       <h4 className="pt-3 text-success fw-bold">{growth}</h4>
                     </div>

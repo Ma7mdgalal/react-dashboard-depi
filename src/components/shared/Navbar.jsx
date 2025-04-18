@@ -9,7 +9,6 @@ function Navbar() {
     { name: "Dashboard", path: "/" },
     { name: "Analytics", path: "/analytics" },
     { name: "Posts", path: "/posts" },
-    { name: "Engagement", path: "/engagement" },
     { name: "Competitor", path: "/competitor" },
     {
       name: "Settings",

@@ -41,18 +41,6 @@ const Charts = () => {
     line: {},
   });
 
-  // Geographic data for world map
-  const [geoData] = useState({
-    regions: [
-      { name: "North America", value: 35, lat: 40, lng: -100 },
-      { name: "South America", value: 15, lat: -15, lng: -60 },
-      { name: "Europe", value: 25, lat: 50, lng: 10 },
-      { name: "Africa", value: 10, lat: 0, lng: 20 },
-      { name: "Asia", value: 30, lat: 30, lng: 100 },
-      { name: "Australia", value: 5, lat: -25, lng: 135 },
-    ],
-  });
-
   // Chart configuration options
   const chartOptions = {
     bar: {
@@ -90,7 +78,7 @@ const Charts = () => {
           labels: ["Likes", "Comments", "Shares", "Follow"],
           datasets: [
             {
-              data: [41, 17, 41, 41],
+              data: [25, 25, 25, 25],
               backgroundColor: ["#FFC107", "#FFE082", "#FFECB3", "#ffe4c4"],
               borderWidth: 0,
             },
@@ -512,14 +500,16 @@ const Charts = () => {
     if (!chartData.pie.labels) return null;
 
     return chartData.pie.labels.map((label, index) => (
-      <div className="d-flex align-items-center mb-2" key={label}>
+      <div
+        className="d-flex justify-content-center align-items-center mb-1 "
+        key={label}
+      >
         <div
           className="me-2"
           style={{
-            width: "10px",
-            height: "10px",
+            width: "1rem",
+            height: "1rem",
             backgroundColor: chartData.pie.datasets[0].backgroundColor[index],
-            borderRadius: "50%",
           }}
         ></div>
         <span>{label}</span>
@@ -558,58 +548,17 @@ const Charts = () => {
     </Dropdown>
   );
 
-  // Component for map pins with value bubbles
-  const MapPin = ({ name, value, lat, lng }) => {
-    // Calculate position based on a simple projection
-    // This is a basic approximation that works for visualization purposes
-    const x = ((lng + 180) / 360) * 100; // Convert longitude to percentage across width
-    const y = ((90 - lat) / 180) * 100; // Convert latitude to percentage of height
-
-    return (
-      <div
-        className="position-absolute"
-        style={{
-          left: `${x}%`,
-          top: `${y}%`,
-          transform: "translate(-50%, -50%)",
-        }}
-      >
-        <div
-          className="rounded-circle bg-warning position-relative"
-          style={{
-            width: `${Math.max(20, value)}px`,
-            height: `${Math.max(20, value)}px`,
-            opacity: 0.7,
-          }}
-        >
-          <div
-            className="position-absolute bg-white rounded-pill px-2 py-1 shadow-sm"
-            style={{
-              top: "-20px",
-              left: "50%",
-              transform: "translateX(-50%)",
-              fontSize: "0.75rem",
-              whiteSpace: "nowrap",
-            }}
-          >
-            {name}: {value}%
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   return (
     <div className="min-vh-100">
       {/* Global filter controls - Now in top right */}
-      <Container fluid className="py-4">
-        <Row className="mb-4">
-          <Col md={12} className="d-flex justify-content-end">
+      <Container fluid className="py-2">
+        <Row>
+          <Col md={12} className="d-flex justify-content-start">
             <Card className="shadow-sm rounded-4 border-0">
               <Card.Body className="p-3">
                 <div className="d-flex align-items-center">
                   <h6 className="mb-0 me-3">Dashboard Controls</h6>
-                  <div className="me-2" style={{ width: "180px" }}>
+                  <div className="me-3" style={{ width: "9rem" }}>
                     <FilterDropdown
                       title="Time Range"
                       value={timeRange}
@@ -617,7 +566,7 @@ const Charts = () => {
                       onChange={setTimeRange}
                     />
                   </div>
-                  <div style={{ width: "180px" }}>
+                  <div style={{ width: "9rem" }}>
                     <FilterDropdown
                       title="Metric Type"
                       value={metricType}
@@ -631,12 +580,12 @@ const Charts = () => {
           </Col>
         </Row>
 
-        <Row>
+        <Row className="mt-3">
           {/* Overview */}
-          <Col md={5}>
-            <Card className="shadow-sm rounded-4 mb-4 border-0 py-4">
+          <Col md={12} lg={4} className="mb-3 mt-5">
+            <Card className="shadow-sm rounded-4 border-0">
               <Card.Body className="p-4">
-                <h5 className="mb-4">Overview</h5>
+                <h5 className="mb-5">Overview</h5>
 
                 <div className="bg-white rounded-pill p-3 mb-3 d-flex justify-content-between align-items-center border">
                   <span className="fw-bold fs-6">Followers : 25.3k</span>
@@ -656,13 +605,16 @@ const Charts = () => {
           </Col>
 
           {/* Middle chart - Pie */}
-          <Col md={3} lg={4}>
-            <Card className="shadow-sm rounded-4 mb-4 border-0">
-              <Card.Body className="p-4">
+          <Col md={12} lg={8} className="mb-3 ">
+            <Card className="shadow-sm rounded-4 mb-1 border-0">
+              <Card.Body className="p-3">
                 <h5 className="mb-3">
                   {metricType} Distribution - {timeRange}
                 </h5>
-                <div className="position-relative" style={{ height: "10rem" }}>
+                <div
+                  className="d-flex justify-content-center"
+                  style={{ height: "13rem" }}
+                >
                   {chartData.pie.labels && (
                     <Pie data={chartData.pie} options={chartOptions.pie} />
                   )}
@@ -671,15 +623,15 @@ const Charts = () => {
               </Card.Body>
             </Card>
           </Col>
-
-          {/* Right analysis - Bar */}
-          <Col md={4} lg={3}>
-            <Card className="shadow-sm rounded-4 mb-4 border-0 py-4">
-              <Card.Body className="p-4">
+        </Row>
+        <Row>
+          <Col md={12} lg={6}>
+            <Card className="shadow-sm rounded-4 mb-4 border-0 py-4 ">
+              <Card.Body className="p-4 ">
                 <h5 className="mb-3">
                   {metricType} Trends - {timeRange}
                 </h5>
-                <div style={{ height: "10rem" }}>
+                <div style={{ height: "15rem" }}>
                   {chartData.bar.labels && (
                     <Bar data={chartData.bar} options={chartOptions.bar} />
                   )}
@@ -687,11 +639,9 @@ const Charts = () => {
               </Card.Body>
             </Card>
           </Col>
-        </Row>
 
-        <Row>
           {/* Growth Chart - Line */}
-          <Col md={5}>
+          <Col md={12} lg={6} className="mt-4">
             <Card className="shadow-sm rounded-4 mb-4 border-0">
               <Card.Body className="p-4">
                 <h5 className="mb-3">
