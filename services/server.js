@@ -1,51 +1,54 @@
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const axios = require("axios");
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
+import bcrypt from "bcryptjs";
+import usersModel from "./models/users.js"; 
+
+dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// MongoDB Connection
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/users", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-// Social Media Schema
-const SocialMediaSchema = new mongoose.Schema({
-  platform: String,
-  followers: Number,
-  likes: Number,
-  comments: Number,
-  shares: Number,
-  growth: String,
-  barData: Object,
-});
-
-const SocialMedia = mongoose.model("SocialMedia", SocialMediaSchema);
-
-// Fetch Social Media Data (Mock API - Replace with actual API calls)
-app.get("/api/social-data", async (req, res) => {
+// Registration endpoint (hash the password)
+app.post("/register", async (req, res) => {
   try {
-    const socialData = await SocialMedia.find();
-    res.json(socialData);
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const user = await usersModel.create({ ...req.body, password: hashedPassword });
+    res.json(user);
   } catch (error) {
-    res.status(500).json({ error: "Server Error" });
+    console.error(error);
+    res.status(500).json({ message: "Failed to register user" });
   }
 });
 
-// Update Social Media Data (For Testing)
-app.post("/api/social-data", async (req, res) => {
-  try {
-    await SocialMedia.create(req.body);
-    res.json({ message: "Data saved successfully" });
-  } catch (error) {
-    res.status(500).json({ error: "Failed to save data" });
-  }
+// Login endpoint (compare hashed password)23
+app.post("/login", (req, res) => {
+  const { email, password } = req.body;
+  usersModel.findOne({ email }).then(user => {
+    if (user) {
+      bcrypt.compare(password, user.password, (err, isMatch) => {
+        if (isMatch) {
+          res.json({ message: "success" });
+        } else {
+          res.status(400).json({ message: "Password is incorrect" });
+        }
+      });
+    } else {
+      res.status(400).json({ message: "No such record" });
+    }
+  }).catch(error => {
+    res.status(500).json({ message: "Server error" });
+  });
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
