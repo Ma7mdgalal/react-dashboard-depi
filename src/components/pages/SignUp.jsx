@@ -63,7 +63,7 @@ function SignUp() {
               type="text"
               id="fname"
               className="auth-input"
-              placeholder="Enter your first name"
+              placeholder="First name"
               value={fName}
               onChange={(e) => setFName(e.target.value)}
               aria-label="First name"
@@ -72,7 +72,7 @@ function SignUp() {
               type="text"
               id="sname"
               className="auth-input"
-              placeholder="Enter your last name"
+              placeholder="Last name"
               value={lName}
               onChange={(e) => setLName(e.target.value)}
               aria-label="Last name"
@@ -81,7 +81,7 @@ function SignUp() {
               type="email"
               id="email"
               className="auth-input"
-              placeholder="Enter your email"
+              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               aria-label="Email"
@@ -90,7 +90,7 @@ function SignUp() {
               type="password"
               id="password"
               className="auth-input"
-              placeholder="Enter your password"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               aria-label="Password"

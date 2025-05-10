@@ -72,12 +72,12 @@ const Charts = () => {
 
   // Dark palette colors
   const darkPalette = {
-    primary: "#4ED7F1", // Indigo
-    secondary: "#6FE6FC", // Lighter indigo
-    tertiary: "#A8F1FF", // Even lighter indigo
-    quaternary: "#A8FFFF", // Lightest indigo
-    accent: "#6FE6FC", // Darker indigo
-    highlight: "#A8F1FF", // Darkest indigo
+    primary: "#4ED7F1",
+    secondary: "#6FE6FC",
+    tertiary: "#A8F1FF",
+    quaternary: "#A8FFFF",
+    accent: "#6FE6FC",
+    highlight: "#A8F1FF",
   };
 
   // Sample data maps for different selections
@@ -611,7 +611,6 @@ const Charts = () => {
         className="w-100 text-start border d-flex align-items-center"
       >
         <AiFillThunderbolt style={{ color: "#4ED7F1" }} className="mx-1 mt-1" />
-
         {value}
       </Dropdown.Toggle>
       <Dropdown.Menu>
@@ -626,7 +625,7 @@ const Charts = () => {
 
   return (
     <div className="min-vh-100">
-      {/* Global filter controls - Now in top right */}
+      {/* Global filter controls */}
       <Container fluid>
         <Row>
           <Col md={12} className="d-flex justify-content-start">
@@ -645,11 +644,9 @@ const Charts = () => {
                       style={{ minWidth: "140px", maxWidth: "200px" }}
                     >
                       <FilterDropdown
-                        title="Time Range"
                         value={timeRange}
                         options={["Daily", "Weekly", "Monthly"]}
                         onChange={setTimeRange}
-                        className="w-100"
                       />
                     </div>
                     <div
@@ -657,11 +654,9 @@ const Charts = () => {
                       style={{ minWidth: "140px", maxWidth: "200px" }}
                     >
                       <FilterDropdown
-                        title="Metric Type"
                         value={metricType}
                         options={["Engagement", "Reach", "Impressions"]}
                         onChange={setMetricType}
-                        className="w-100"
                       />
                     </div>
                   </div>
