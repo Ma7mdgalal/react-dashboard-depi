@@ -1,24 +1,36 @@
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/shared/Navbar";
-import Dashboard from "./components/pages/Dashboard";
-import Analytics from "./components/pages/Analytics";
-import Posts from "./components/pages/Posts";
-import Settings from "./components/pages/Setting";
-import Competitor from "./components/pages/Competitor";
+import Navbar from "@shared/Navbar";
+import Dashboard from "@pages/Dashboard";
+import Analytics from "@pages/Analytics";
+import Posts from "@pages/Posts";
+import Settings from "@pages/Setting";
+import Competitor from "@pages/Competitor";
 import NotFound from "./components/error404/Notfound";
-import ProfileManage from "./components/pages/ProfileManage";
-
+import ProfileManage from "@pages/ProfileManage";
+import SignUp from "@pages/SignUp";
+import Login from "@pages/Login";
+import Landing from "./components/pages/Landing";
+import Selections from "./components/pages/Selections";
 function App() {
+  const hideNavbarPaths = ["/", "/signup", "/login", "/selections"];
+
+  const shouldHideNavbar = hideNavbarPaths.includes(location.pathname);
+
   return (
     <>
-      <Navbar />
+      {/* Conditionally render Navbar */}
+      {!shouldHideNavbar && <Navbar />}
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/posts" element={<Posts />} />
         <Route path="/competitor" element={<Competitor />} />
         <Route path="/settings/notifications" element={<Settings />} />
-        <Route path="settings/profile" element={<ProfileManage />} />
+        <Route path="/settings/profile" element={<ProfileManage />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/selections" element={<Selections />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

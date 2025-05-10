@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-// Import Lucide React icons
 import { X, ChevronDown } from "lucide-react";
 
 function Settings() {
-  // Initial notification data
   const initialNotifications = [
     {
       id: 1,
@@ -28,29 +26,36 @@ function Settings() {
     },
   ];
 
-  // State to manage the notifications
   const [notifications, setNotifications] = useState(initialNotifications);
 
-  // Function to delete a notification by its id
   const deleteNotification = (idToDelete) => {
     setNotifications(
       notifications.filter((notification) => notification.id !== idToDelete)
     );
   };
 
+  const [isHovered, setIsHovered] = useState(false);
+
+  const buttonStyle = {
+    backgroundColor: isHovered ? "#4ED7F1" : "#EFF1F5",
+    fontWeight: "bold",
+    transition: "background-color 0.3s ease-in-out", // Added transition for background-color
+  };
   return (
     <div className="container-fluid py-5">
       {/* Header Section */}
       <div className="d-flex align-items-center mb-4">
-        <h2 className="text-warning fw-bold mx-auto">
+        <h2 className="text-black fw-bold mx-auto">
           All Notifications
-          <span className="badge bg-warning text-dark ms-2 fs-5">
+          <span
+            className="badge text-black ms-2 fs-5"
+            style={{ backgroundColor: "#4ED7F1" }}
+          >
             {notifications.length}
           </span>
         </h2>
       </div>
 
-      {/* Notification Cards */}
       <div className="row">
         {notifications.length > 0 ? (
           notifications.map((notification) => (
@@ -70,12 +75,16 @@ function Settings() {
         )}
       </div>
 
-      {/* Load More Button - only show if there are notifications */}
       {notifications.length > 0 && (
         <div className="text-center mt-4">
-          <button className="btn btn-outline-dark btn-lg">
+          <button
+            className="btn btn-lg"
+            style={buttonStyle}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
             Load More
-            <ChevronDown className="ms-2" size={20} />
+            <ChevronDown className="ms-2" size={25} />
           </button>
         </div>
       )}
@@ -83,9 +92,7 @@ function Settings() {
   );
 }
 
-// Reusable Notification Card Component with delete functionality
 function NotificationCard({ id, title, content, date, onDelete }) {
-  // Handler for the delete button click
   const handleDelete = () => {
     onDelete(id);
   };
@@ -94,7 +101,7 @@ function NotificationCard({ id, title, content, date, onDelete }) {
     <div className="col-12 mb-5">
       <div
         className="card shadow-sm rounded-3"
-        style={{ backgroundColor: "#bebebe" }}
+        style={{ backgroundColor: "#FAFAFA" }}
       >
         <div className="card-body position-relative">
           <h3 className="card-title fw-bold me-5">{title}</h3>
@@ -103,7 +110,7 @@ function NotificationCard({ id, title, content, date, onDelete }) {
             {date}
           </span>
           <X
-            className="position-absolute top-0 end-0 me-3 mt-2 cursor-pointer"
+            className="position-absolute top-0 end-0 me-3 mt-2 cursor-pointer text-danger fw-bolder"
             size={24}
             strokeWidth={1.5}
             onClick={handleDelete}

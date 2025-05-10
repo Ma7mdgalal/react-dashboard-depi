@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import myPhoto from "./myPhoto.png";
-import instagramIcon from "../../assets/images/instagram.png";
-import facebookIcon from "../../assets/images/facebook.png";
-import tiktokIcon from "../../assets/images/tiktok.png";
-import linkedinIcon from "../../assets/images/linkedin.png";
-import twitterIcon from "../../assets/images/twitter.png";
+// import { stats } from "@Util/index.js"; // Import stats from util
+// import { platformData } from "@Util/index.js"; // Import platformData from util
+import { barOptions } from "@Util/index.js"; // Import barOptions from util
+import { lineOptions } from "@Util/index.js"; // Import lineOptions from util
+import { platformIcons } from "@Util/index.js"; // Import lineOptions from util
+import myPhoto from "@images/myPhoto.png";
+
 import {
   FaFacebookF,
   FaInstagram,
@@ -12,6 +13,11 @@ import {
   FaLinkedin,
   FaTiktok,
 } from "react-icons/fa";
+import {
+  AiOutlineLike,
+  AiOutlineComment,
+  AiOutlineShareAlt,
+} from "react-icons/ai";
 import { Container, Row, Col, Card, Navbar, Nav } from "react-bootstrap";
 import {
   Chart as ChartJS,
@@ -26,6 +32,7 @@ import {
 } from "chart.js";
 import { Bar, Line } from "react-chartjs-2";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { IconContext } from "react-icons";
 
 // Register ChartJS components
 ChartJS.register(
@@ -41,34 +48,36 @@ ChartJS.register(
 
 const MainDashboard = () => {
   const [selectedPlatform, setSelectedPlatform] = useState("facebook");
-  const [stats, setStats] = useState([
+
+  // Updated stats with consistent icons from react-icons/ai and gradient background colors
+  const updatedStats = [
     {
       id: "likes",
-      icon: "❤",
-      fontAwesome: "fas fa-heart",
-      color: "text-danger",
-      label: "Total Likes",
+      label: "Likes",
+      icon: <AiOutlineLike />,
+      color: "text-primary",
+      bgColor: "#F5F5F5", // Lightest gray
     },
     {
       id: "comments",
-      icon: "💬",
-      fontAwesome: "fas fa-comment",
-      color: "text-secondary",
-      label: "Total Comments",
+      label: "Comments",
+      icon: <AiOutlineComment />,
+      color: "text-success",
+      bgColor: "#E5E5E5", // Medium gray
     },
     {
       id: "shares",
-      icon: "🔄",
-      fontAwesome: "fas fa-share-alt",
-      color: "text-info",
-      label: "Total Shares",
+      label: "Shares",
+      icon: <AiOutlineShareAlt />,
+      color: "text-danger",
+      bgColor: "#D5D5D5", // Darkest gray
     },
-  ]);
+  ];
 
   const platformData = {
     facebook: {
       icon: <FaFacebookF />,
-      color: "#4267B2",
+      color: "#0068FF",
       barData: {
         labels: [
           "JANUARY",
@@ -82,7 +91,7 @@ const MainDashboard = () => {
         datasets: [
           {
             data: [40, 70, 90, 70, 30, 60, 40],
-            backgroundColor: "#4267B2",
+            backgroundColor: "#4ED7F1",
             borderRadius: 6,
             borderSkipped: false,
             barThickness: 20,
@@ -97,7 +106,7 @@ const MainDashboard = () => {
     },
     instagram: {
       icon: <FaInstagram />,
-      color: "#4488",
+      color: "#FD0B6A",
       barData: {
         labels: [
           "JANUARY",
@@ -111,7 +120,7 @@ const MainDashboard = () => {
         datasets: [
           {
             data: [60, 80, 100, 80, 50, 70, 60],
-            backgroundColor: "#E1306C",
+            backgroundColor: "#6FE6FC",
             borderRadius: 6,
             borderSkipped: false,
             barThickness: 20,
@@ -140,7 +149,7 @@ const MainDashboard = () => {
         datasets: [
           {
             data: [20, 40, 60, 40, 20, 50, 30],
-            backgroundColor: "#1DA1F2",
+            backgroundColor: "#A8F1FF",
             borderRadius: 6,
             borderSkipped: false,
             barThickness: 20,
@@ -184,7 +193,7 @@ const MainDashboard = () => {
     },
     tiktok: {
       icon: <FaTiktok />,
-      color: "#000000",
+      color: "#B40818",
       barData: {
         labels: [
           "JANUARY",
@@ -221,7 +230,7 @@ const MainDashboard = () => {
     datasets: [
       {
         data: [30, 60, 40, 70, 50, 65],
-        borderColor: "#FFC107",
+        borderColor: "#4ED7F1",
         backgroundColor: "transparent",
         tension: 0.4,
         pointRadius: 0,
@@ -230,79 +239,23 @@ const MainDashboard = () => {
     ],
   });
 
-  const barOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: false,
-      },
-      tooltip: {
-        enabled: true,
-      },
-    },
-    scales: {
-      x: {
-        grid: {
-          display: false,
-        },
-      },
-      y: {
-        display: false,
-        grid: {
-          display: false,
-        },
-      },
-    },
-    maintainAspectRatio: false,
-  };
-
-  const lineOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: false,
-      },
-      tooltip: {
-        enabled: false,
-      },
-    },
-    scales: {
-      x: {
-        display: false,
-      },
-      y: {
-        display: false,
-      },
-    },
-    elements: {
-      point: {
-        radius: 0,
-      },
-    },
-    maintainAspectRatio: false,
-  };
-  const [platformIcons] = useState([
-    { name: "instagram", icon: instagramIcon },
-    { name: "facebook", icon: facebookIcon },
-    { name: "twitter", icon: twitterIcon },
-    { name: "linkedin", icon: linkedinIcon },
-    { name: "tiktok", icon: tiktokIcon },
-  ]);
   return (
     <div className="min-vh-100">
       <Container fluid className="py-5">
         {/* Social Media Platforms */}
         <Row className="mb-4">
           <Col>
-            <div className="d-flex flex-wrap gap-5 justify-content-center ">
+            <div className="d-flex flex-wrap gap-5 justify-content-center">
               {Object.entries(platformData).map(([platform, data]) => (
                 <Card
                   key={platform}
-                  className={`social-card border-0 rounded-4 mb-5 ${
-                    selectedPlatform === platform ? "active-card" : ""
+                  className={`social-card border-0 rounded-4 mb-5 shadow ${
+                    selectedPlatform === platform
+                      ? "active-card shadow"
+                      : "shadow"
                   } text-center`}
                   style={{
-                    width: "17%",
+                    width: "15%",
                     minWidth: "20rem",
                   }}
                   onClick={() => setSelectedPlatform(platform)}
@@ -320,7 +273,7 @@ const MainDashboard = () => {
                     >
                       {data.followers}
                     </h2>
-                    <p className="text-muted fs-4">Followers</p>
+                    <p className="fs-4">Followers</p>
                   </Card.Body>
                 </Card>
               ))}
@@ -329,62 +282,70 @@ const MainDashboard = () => {
         </Row>
         <Row>
           <Col>
-            <Card className="shadow border-0  rounded-5 pt-4">
+            <Card
+              className="border-0 rounded-5 pt-4"
+              style={{ backgroundColor: "#EFF1F5" }}
+            >
               <Card.Body className="py-5 px-lg-4 px-1">
                 <Row className="gap-4">
                   {/* Followers Chart */}
                   <Col
                     md={12}
                     lg={5}
-                    className="shadow p-4 rounded-4 order-3 order-lg-0"
+                    className=" p-4 rounded-4 order-1 order-lg-0"
+                    style={{ backgroundColor: "#F5F5F5" }}
                   >
-                    <h5 className="mb-4 fs-2">
+                    <h5 className="mb-4 fs-2 text-dark">
                       {selectedPlatform.charAt(0).toUpperCase() +
                         selectedPlatform.slice(1)}{" "}
                       Followers
                     </h5>
-                    <div style={{ height: "15rem" }}>
+                    <div style={{ height: "16rem" }}>
                       <Bar data={barData} options={barOptions} />
                     </div>
                   </Col>
                   {/* Engagement Metrics */}
                   <Col md={8} lg={4} className="mx-auto order-1 order-lg-0">
                     <div className="d-flex flex-column h-100 justify-content-between">
-                      {stats.map((item) => (
-                        <Card
-                          key={item.id}
-                          className="shadow rounded-4 py-2 mb-3 "
-                        >
-                          <Card.Body className="p-3 d-flex align-items-center ">
-                            {/* Icon */}
-                            <div className={`me-3 ${item.color}`}>
-                              <span className="fs-2">{item.icon}</span>
-                            </div>
+                      {/* Using IconContext.Provider to ensure consistent icon sizing */}
+                      <IconContext.Provider value={{ size: "24px" }}>
+                        {updatedStats.map((item) => (
+                          <Card
+                            key={item.id}
+                            className="rounded-4 py-2 mb-3"
+                            style={{ backgroundColor: item.bgColor }}
+                          >
+                            <Card.Body className="p-3 d-flex align-items-center ">
+                              {/* Icon */}
+                              <div className={`me-3 ${item.color}`}>
+                                {item.icon}
+                              </div>
 
-                            {/* Label & Count */}
-                            <div className="flex-grow-1">
-                              <h6 className="mb-0 fs-5">{item.label}</h6>
-                              <h5 className=" mb-0 fs-6 fw-medium text-muted">
-                                {item.id === "shares"
-                                  ? shares
-                                  : item.id === "likes"
-                                  ? likes
-                                  : item.id === "comments"
-                                  ? comments
-                                  : ""}
-                              </h5>
-                            </div>
+                              {/* Label & Count */}
+                              <div className="flex-grow-1">
+                                <h6 className="mb-0 fs-5">{item.label}</h6>
+                                <h5 className=" mb-0 fs-6 fw-medium text-muted">
+                                  {item.id === "shares"
+                                    ? shares
+                                    : item.id === "likes"
+                                    ? likes
+                                    : item.id === "comments"
+                                    ? comments
+                                    : ""}
+                                </h5>
+                              </div>
 
-                            {/* Chart */}
-                            <div style={{ width: "4rem", height: "2.5rem" }}>
-                              <Line
-                                data={createLineData()}
-                                options={lineOptions}
-                              />
-                            </div>
-                          </Card.Body>
-                        </Card>
-                      ))}
+                              {/* Chart */}
+                              <div style={{ width: "4rem", height: "2.5rem" }}>
+                                <Line
+                                  data={createLineData()}
+                                  options={lineOptions}
+                                />
+                              </div>
+                            </Card.Body>
+                          </Card>
+                        ))}
+                      </IconContext.Provider>
                     </div>
                   </Col>
                   {/* Profile Section */}
@@ -395,7 +356,7 @@ const MainDashboard = () => {
                           style={{
                             width: "12rem",
                             height: "12rem",
-                            border: "0.3rem solid #FFC107",
+                            border: "0.4rem solid  #A8F1FF",
                             borderRadius: "50%",
                             overflow: "hidden",
                           }}

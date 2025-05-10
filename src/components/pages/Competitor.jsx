@@ -1,162 +1,54 @@
-import React from "react";
-import cardImage from "../../assets/images/myPhoto.png";
-function Competitor() {
+import { CompetitorCard } from "./CompetitorCard";
+import { competitors } from "@Util/index.js";
+
+import { Container, Row, Col, Form } from "react-bootstrap";
+
+const Competitor = () => {
   return (
-    <>
-      {/* Main Content */}
-      <div className="container my-5">
-        <div className="row mb-4">
-          <div className="col-md-4">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Competitor 2 account"
-            />
-          </div>
-          <div className="col-md-4">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Competitor 1 account"
-            />
-          </div>
-          <div className="col-md-4">
-            <select className="form-select">
-              <option selected>Select Item</option>
-              <option value="facebook">Facebook</option>
-              <option value="instagram">Instagram</option>
-              <option value="twitter">Twitter</option>
-              <option value="linkedin">LinkedIn</option>
-              <option value="tiktok">TikTok</option>
-            </select>
-          </div>
+    <div className="min-vh-100">
+      <Container className="py-4">
+        <div className="d-flex justify-content-between align-items-center mb-4">
+          <Form.Control
+            type="text"
+            placeholder="Compare..."
+            style={{
+              width: "250px",
+              border: "1px solid #A8F1FF",
+            }}
+          />
+          <Form.Control
+            type="text"
+            placeholder="Competitor1"
+            style={{
+              width: "250px",
+              border: "1px solid #A8F1FF",
+            }}
+          />
+          <Form.Control
+            type="text"
+            placeholder="Competitor2"
+            style={{ width: "250px", border: "1px solid #A8F1FF" }}
+          />
+          <Form.Select style={{ width: "200px", border: "1px solid #A8F1FF" }}>
+            <option>Select Item</option>
+            <option value="facebook">Facebook</option>
+            <option value="instagram">Instagram</option>
+            <option value="twitter">Twitter</option>
+            <option value="linkedin">LinkedIn</option>
+            <option value="tiktok">TikTok</option>
+          </Form.Select>
         </div>
 
-        <div className="row text-center">
-          {/* Competitor 1 */}
-          <div className="col-md-4">
-            <div className="card p-3">
-              <img
-                src={cardImage}
-                alt="Profile 1"
-                className="profile-img mb-3"
-              />
-              <div className="card-body">
-                <p className="stats">
-                  <span className="highlight">41K</span> followers
-                </p>
-                <p className="stats">
-                  <span className="highlight">220</span> likes/day
-                </p>
-                <p className="stats">
-                  <span className="highlight">200</span> comments/day
-                </p>
-                <p className="stats">
-                  <span className="highlight">31</span> shares/day
-                </p>
-                <p className="stats">
-                  <span className="highlight">2</span> posts/week
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Competitor 2 */}
-          <div className="col-md-4">
-            <div className="card p-3">
-              <img
-                src={cardImage}
-                alt="Profile 2"
-                className="profile-img mb-3"
-              />
-              <div className="card-body">
-                <p className="stats">
-                  <span className="highlight">241K</span> followers
-                </p>
-                <p className="stats">
-                  <span className="highlight">2000</span> likes/day
-                </p>
-                <p className="stats">
-                  <span className="highlight">800</span> comments/day
-                </p>
-                <p className="stats">
-                  <span className="highlight">71</span> shares/day
-                </p>
-                <p className="stats">
-                  <span className="highlight">4</span> posts/week
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Competitor 3 */}
-          <div className="col-md-4">
-            <div className="card p-3">
-              <img
-                src={cardImage}
-                alt="Profile 3"
-                className="profile-img mb-3"
-              />
-              <div className="card-body">
-                <p className="stats">
-                  <span className="highlight">316K</span> followers
-                </p>
-                <p className="stats">
-                  <span className="highlight">2312</span> likes/day
-                </p>
-                <p className="stats">
-                  <span className="highlight">100</span> comments/day
-                </p>
-                <p className="stats">
-                  <span className="highlight">21</span> shares/day
-                </p>
-                <p className="stats">
-                  <span className="highlight">1</span> post/week
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Comments Section */}
-        <div className="row mt-5">
-          <div className="col-md-4">
-            <div className="card">
-              <div className="card-body">
-                <p>
-                  <strong>Rodney Salah</strong>
-                </p>
-                <p>Great content! Keep it up.</p>
-                <p className="text-muted">2 comments · 5 shares</p>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="card">
-              <div className="card-body">
-                <p>
-                  <strong>Omar Hassan</strong>
-                </p>
-                <p>Very informative post. Thanks for sharing!</p>
-                <p className="text-muted">3 comments · 7 shares</p>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="card">
-              <div className="card-body">
-                <p>
-                  <strong>Jordan Blake</strong>
-                </p>
-                <p>Interesting insights. Looking forward to more posts.</p>
-                <p className="text-muted">4 comments · 10 shares</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+        <Row xs={1} md={2} lg={3} className="g-4">
+          {competitors.map((competitor, index) => (
+            <Col key={index}>
+              <CompetitorCard stats={competitor} />
+            </Col>
+          ))}
+        </Row>
+      </Container>
+    </div>
   );
-}
+};
 
 export default Competitor;

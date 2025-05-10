@@ -1,9 +1,10 @@
 "use client";
-import Photo from "./myPhoto.png"
+import Photo from "@images/myPhoto.png";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Dropdown, Card, Form, InputGroup } from "react-bootstrap";
 import { ChevronDown, ThreeDots, Lightning, Send } from "react-bootstrap-icons";
+import { AiFillThunderbolt } from "react-icons/ai";
 
 function Posts() {
   // Demographics data in state
@@ -46,7 +47,7 @@ function Posts() {
       data: countriesData,
       renderItem: (item, index) => (
         <div key={index} className="d-flex justify-content-between mb-3">
-          <span className="fw-bold">{item.name}</span>
+          <span className="fw-medium">{item.name}</span>
           <span className="text-secondary">({item.percentage})</span>
         </div>
       ),
@@ -57,7 +58,7 @@ function Posts() {
       data: ageData,
       renderItem: (item, index) => (
         <div key={index} className="d-flex justify-content-between mb-3">
-          <span className="fw-bold">{item.range}</span>
+          <span className="fw-medium">{item.range}</span>
           <span className="text-secondary">({item.percentage})</span>
         </div>
       ),
@@ -68,7 +69,7 @@ function Posts() {
       data: activityData,
       renderItem: (item, index) => (
         <div key={index} className="d-flex justify-content-between mb-3">
-          <span className="fw-bold">{item.time}</span>
+          <span className="fw-medium">{item.time}</span>
           <span className="text-secondary">({item.percentage})</span>
         </div>
       ),
@@ -149,9 +150,8 @@ function Posts() {
         className="border rounded-3 px-3"
         style={{ backgroundColor: "white" }}
       >
-        <Lightning size={14} className="me-2" />
+        <AiFillThunderbolt style={{ color: "#4ED7F1" }} className="mx-1 fs-5" />
         <span className="me-1">Select Item</span>
-        <ChevronDown size={14} />
       </Dropdown.Toggle>
       <Dropdown.Menu>
         {dropdownItems.map((item) => (
@@ -185,36 +185,28 @@ function Posts() {
   );
 
   return (
-    <div className=" " style={{ backgroundColor: "#eae8e8" }}>
+    <div className="">
       <div className="container-fluid px-0">
-        <div className="row g-0"  >
+        <div className="row g-0">
           {/* Main Content Area */}
           <div className="col-lg-8 col-xl-9 p-4">
             {/* Audience Insights */}
             <Card
               className="shadow rounded-4 mb-4"
-              style={{ border: "none", backgroundColor: "#eae8e8" }}
+              style={{ border: "none", backgroundColor: "#FAFAFA" }}
             >
               <Card.Body className="p-4">
-                <h5
-                  className="text-secondary mb-4"
-                  style={{ color: "#888", fontWeight: "500" }}
-                >
-                  Audience Insights
-                </h5>
+                <h5 className="mb-4 fw-bold fs-4">Audience Insights</h5>
                 <div className="row g-4">
                   {/* Map through insight cards */}
                   {insightCards.map((card) => (
                     <div key={card.id} className="col-md-4">
                       <Card
-                        className="border-1 border-dark rounded-4 h-100"
-                        style={{ backgroundColor: "#eae8e8" }}
+                        className="rounded-4 h-100"
+                        style={{ backgroundColor: "#F5F5F5" }}
                       >
                         <Card.Body className="p-4 fs-5">
-                          <h5
-                            className="text-center mb-4"
-                            style={{ color: "#fab915", fontWeight: "700" }}
-                          >
+                          <h5 className="text-balck fw-bold text-center mb-4">
                             {card.title}
                           </h5>
                           {card.data.map((item, index) =>
@@ -231,15 +223,10 @@ function Posts() {
             {/* Chatbot */}
             <Card
               className="shadow rounded-4"
-              style={{ border: "none", backgroundColor: "#f0f0f0" }}
+              style={{ border: "none", backgroundColor: "#EFF1F5" }}
             >
               <Card.Body className="p-4">
-                <h5
-                  className="text-secondary fs-4 mb-4"
-                  style={{ color: "#888", fontWeight: "600" }}
-                >
-                  Chatbot
-                </h5>
+                <h5 className=" fs-4 mb-4 fw-bold">Chatbot</h5>
                 <div
                   className="chat-container p-3 rounded-3 mb-3"
                   style={{ backgroundColor: "#f0f0f0", minHeight: "180px" }}
@@ -254,19 +241,17 @@ function Posts() {
                       }`}
                     >
                       <div
-                        className={`d-inline-block p-3 rounded-3 ${
-                          msg.sender === "user"
-                            ? "bg-warning bg-opacity-25"
-                            : "bg-white"
+                        className={`d-inline-block p-3 rounded-3 fw-bold ${
+                          msg.sender === "user" ? "bg-opacity-25" : "bg-white"
                         }`}
                         style={{
-                          maxWidth: "80%",
+                          maxWidth: "50%",
                           backgroundColor:
-                            msg.sender === "user" ? "#FFF8E1" : "white",
+                            msg.sender === "user" ? "#A8F1FF" : "white",
                           boxShadow:
                             msg.sender === "user"
-                              ? "0 1px 3px rgba(0,0,0,0.1)"
-                              : "0 1px 3px rgba(0,0,0,0.1)",
+                              ? "0 1px 3px rgb(0, 0, 0, 1)"
+                              : "0 1px 3px rgba(0,0,0,1)",
                         }}
                       >
                         {msg.message}
@@ -277,14 +262,14 @@ function Posts() {
                 <Form onSubmit={handleChatSubmit} className="position-relative">
                   <InputGroup
                     className="rounded-pill overflow-hidden"
-                    style={{ backgroundColor: "#e9e9e9", border: "none" }}
+                    style={{ backgroundColor: "#FAFAFA", border: "none" }}
                   >
                     <Form.Control
                       placeholder="Ask anything"
                       value={chatInput}
                       onChange={(e) => setChatInput(e.target.value)}
                       className="border-0 bg-transparent"
-                      style={{ backgroundColor: "#e9e9e9", boxShadow: "none" }}
+                      style={{ backgroundColor: "#FAFAFA", boxShadow: "none" }}
                     />
                     <div
                       className="position-absolute"
@@ -294,8 +279,8 @@ function Posts() {
                         transform: "translateY(-50%)",
                       }}
                     >
-                      <span style={{ color: "#FFA500" }}>
-                        <Send size={18} />
+                      <span style={{ color: "#4ED7F1" }}>
+                        <Send size={25} />
                       </span>
                     </div>
                   </InputGroup>
@@ -305,21 +290,15 @@ function Posts() {
           </div>
 
           {/* Top 3 Posts Sidebar */}
-          <div className="col-xl-3 col-lg-4 col-md-6 d-flex flex-column py-4">
-        
+          <div className="col-xl-3 col-lg-4 col-md-6 d-flex py-4 align-items-center">
             <Card
               className="rounded-4 shadow border-0 m-1 "
-              style={{ backgroundColor: "#eae8e8" }}
+              style={{ backgroundColor: "#EFF1F5" }}
             >
               <Card.Body className="p-4 d-flex flex-column m-0">
                 <div className="d-flex justify-content-between align-items-center mb-4">
-                  <h5
-                    className="text-secondary m-0"
-                    style={{ color: "#888", fontWeight: "500" }}
-                  >
-                    Top 3 posts
-                  </h5>   
-                   {renderDropdown()}
+                  <h5 className="text-black fw-bold m-0">Top 3 posts</h5>
+                  {renderDropdown()}
                 </div>
 
                 <div className="flex-grow-1">
@@ -330,7 +309,7 @@ function Posts() {
                     >
                       <Card
                         className="border-0   rounded-4"
-                        style={{ backgroundColor: "#dddcdc" }}
+                        style={{ backgroundColor: "#F5F5F5" }}
                       >
                         <Card.Body className="p-3">
                           <div className="d-flex justify-content-between align-items-start mb-2">
@@ -344,7 +323,7 @@ function Posts() {
                                     width: "40px",
                                     height: "40px",
                                     objectFit: "cover",
-                                    backgroundColor: "#333",
+                                    border: "2px solid #4ED7F1",
                                   }}
                                 />
                               </div>

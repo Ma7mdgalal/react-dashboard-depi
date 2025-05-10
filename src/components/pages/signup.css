@@ -1,0 +1,187 @@
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.leftsignin,
+.rightsignin {
+  animation: slideUp 0.8s ease forwards;
+}
+
+.signin-page {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.leftsignin {
+  width: 65%;
+  overflow: hidden;
+}
+
+.logimg {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.rightsignin {
+  width: 35%;
+  background-color: #f8f9fa;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.rightsignin form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-link {
+  display: block;
+  width: fit-content;
+  margin-bottom: 20px;
+}
+
+.logoimg {
+  width: 120px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  animation: pulse 2s infinite;
+}
+
+.rightsignin h1 {
+  font-size: 1.8rem;
+  color: black !important;
+  margin-bottom: 30px;
+}
+
+.auth-input {
+  width: 80%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10000px;
+  font-size: 1rem;
+}
+
+.btn-login {
+  width: 50%;
+  padding: 12px;
+  background-color: black;
+  color: white;
+  font-weight: 500;
+  border: none;
+  border-radius: 10000px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.btn-login:hover {
+  background-color: var(--sec-color);
+  color: black;
+  transform: scale(1.05);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  border: 2px solid var(--main-color);
+}
+
+.error-message {
+  color: #d9534f;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.login-option {
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.login-link {
+  font-weight: bold;
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.login-link:hover {
+  color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .signin-page {
+    flex-direction: column-reverse;
+    height: 100vh;
+  }
+
+  .rightsignin {
+    width: 100%;
+    height: 100vh;
+    padding: 30px 20px;
+    box-sizing: border-box;
+  }
+
+  .auth-input {
+    width: 90%;
+    padding: 10px 12px;
+  }
+
+  .btn-login {
+    width: 90%;
+    padding: 10px;
+  }
+
+  .leftsignin {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .rightsignin h1 {
+    font-size: 1.5rem;
+  }
+
+  .auth-input {
+    width: 95%;
+    padding: 10px 12px;
+  }
+
+  .btn-login {
+    width: 95%;
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  .logoimg {
+    width: 180px !important;
+  }
+
+  .leftsignin {
+    display: none;
+  }
+}

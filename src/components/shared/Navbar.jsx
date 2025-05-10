@@ -1,78 +1,93 @@
-import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { NavDropdown } from "react-bootstrap";
+import { useState } from "react";
+import Logo from "@images/Logo.png";
+import { links } from "@Util/index.js";
 
 function Navbar() {
-  const location = useLocation(); // Get the current URL path
+  const location = useLocation();
+  const [isExpanded, setIsExpanded] = useState(false);
 
-  const [links] = useState([
-    { name: "Dashboard", path: "/" },
-    { name: "Analytics", path: "/analytics" },
-    { name: "Posts", path: "/posts" },
-    { name: "Competitor", path: "/competitor" },
-    {
-      name: "Settings",
-      path: "/settings",
-      drop: ["profile", "notifications"],
-    },
-  ]);
+  // Toggle handler for navbar
+  const handleToggle = () => {
+    setIsExpanded(!isExpanded);
+  };
 
   return (
-    <nav className="navbar navbar-expand-lg py-3">
+    <nav className="navbar navbar-expand-lg py-2 bg-opacity-75">
       <div className="container-fluid">
+        <a className="navbar-brand d-flex align-items-center" href="/">
+          <img
+            src={Logo}
+            alt="Logo"
+            style={{
+              width: "100px",
+              cursor: "pointer",
+              transition: "transform 2s ease-in-out",
+              animation: "pulse 2s infinite",
+            }}
+          />
+        </a>
         <button
-          className="navbar-toggler"
+          className="navbar-toggler border-0"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded={isExpanded}
           aria-label="Toggle navigation"
+          onClick={handleToggle}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mx-auto mb-2 gap-4 mb-lg-0 text-center align-items-center py-3 px-5 rounded-pill shadow-lg border-3 border-bottom border-warning">
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav mx-auto gap-lg-4 gap-md-2">
             {links.map((link, index) => {
               const isDropdownActive = link.drop
                 ? location.pathname.startsWith(link.path)
                 : location.pathname === link.path;
 
               return (
-                <li className="nav-item fw-bold fs-6" key={index}>
+                <li className="nav-item text-center" key={index}>
                   {link.drop ? (
-                    <NavDropdown
-                      title={link.name} // 🔹 Keep title simple to allow correct positioning
-                      id={`dropdown-${link.name}`}
-                      className={`nav-link ${
-                        isDropdownActive
-                          ? "active rounded-pill bg-white shadow px-3 py-2"
-                          : "rounded-5"
-                      }`}
-                      align="end" // Ensures the dropdown aligns properly
-                    >
-                      {link.drop.map((item, i) => (
-                        <NavDropdown.Item
-                          key={i}
-                          as={NavLink}
-                          to={`${link.path}/${item}`}
-                          className={({ isActive }) =>
-                            isActive ? "dropdown-item active" : "dropdown-item"
-                          }
-                        >
-                          {item}
-                        </NavDropdown.Item>
-                      ))}
-                    </NavDropdown>
+                    <div className="nav-item dropdown">
+                      <span
+                        className={`nav-link dropdown-toggle fw-bold text-dark`}
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        style={{
+                          fontSize: "clamp(.5rem, 1.5vw, 1.05rem)",
+                          borderBottom: isDropdownActive
+                            ? "2px solid #4ED7F1"
+                            : "none",
+                          paddingBottom: "4px",
+                          cursor: "pointer",
+                        }}
+                      >
+                        {link.name}
+                      </span>
+                      <ul className="dropdown-menu dropdown-menu-blur">
+                        {link.drop.map((item, i) => (
+                          <li key={i}>
+                            <NavLink
+                              className="dropdown-item fw-bold"
+                              to={`${link.path}/${item}`}
+                            >
+                              {item}
+                            </NavLink>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   ) : (
                     <NavLink
                       to={link.path}
-                      className={({ isActive }) =>
-                        isActive
-                          ? "nav-link active rounded-pill bg-white shadow px-4 py-3"
-                          : "nav-link rounded-5"
-                      }
-                      aria-current="page"
+                      className={({ isActive }) => `nav-link fw-bold text-dark`}
+                      style={({ isActive }) => ({
+                        borderBottom: isActive ? "3px solid #4ED7F1" : "none",
+                        paddingBottom: "4px",
+                        fontSize: "clamp(1rem, 1.5vw, 1.05rem)",
+                      })}
                     >
                       {link.name}
                     </NavLink>

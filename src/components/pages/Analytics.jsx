@@ -13,6 +13,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { AiFillThunderbolt } from "react-icons/ai";
 import { Bar, Pie, Line } from "react-chartjs-2";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -69,6 +70,16 @@ const Charts = () => {
     },
   };
 
+  // Dark palette colors
+  const darkPalette = {
+    primary: "#4ED7F1", // Indigo
+    secondary: "#6FE6FC", // Lighter indigo
+    tertiary: "#A8F1FF", // Even lighter indigo
+    quaternary: "#A8FFFF", // Lightest indigo
+    accent: "#6FE6FC", // Darker indigo
+    highlight: "#A8F1FF", // Darkest indigo
+  };
+
   // Sample data maps for different selections
   const dataMap = {
     // Pie chart data variations
@@ -79,7 +90,12 @@ const Charts = () => {
           datasets: [
             {
               data: [25, 25, 25, 25],
-              backgroundColor: ["#FFC107", "#FFE082", "#FFECB3", "#ffe4c4"],
+              backgroundColor: [
+                darkPalette.primary,
+                darkPalette.secondary,
+                darkPalette.tertiary,
+                darkPalette.quaternary,
+              ],
               borderWidth: 0,
             },
           ],
@@ -89,7 +105,12 @@ const Charts = () => {
           datasets: [
             {
               data: [35, 25, 30, 10],
-              backgroundColor: ["#FFC107", "#FFE082", "#FFECB3", "#ffe4c4"],
+              backgroundColor: [
+                darkPalette.primary,
+                darkPalette.secondary,
+                darkPalette.tertiary,
+                darkPalette.quaternary,
+              ],
               borderWidth: 0,
             },
           ],
@@ -99,7 +120,12 @@ const Charts = () => {
           datasets: [
             {
               data: [50, 10, 25, 15],
-              backgroundColor: ["#FFC107", "#FFE082", "#FFECB3", "#ffe4c4"],
+              backgroundColor: [
+                darkPalette.primary,
+                darkPalette.secondary,
+                darkPalette.tertiary,
+                darkPalette.quaternary,
+              ],
               borderWidth: 0,
             },
           ],
@@ -111,7 +137,12 @@ const Charts = () => {
           datasets: [
             {
               data: [45, 20, 25, 10],
-              backgroundColor: ["#FFC107", "#FFE082", "#FFECB3", "#ffe4c4"],
+              backgroundColor: [
+                darkPalette.primary,
+                darkPalette.secondary,
+                darkPalette.tertiary,
+                darkPalette.quaternary,
+              ],
               borderWidth: 0,
             },
           ],
@@ -121,7 +152,12 @@ const Charts = () => {
           datasets: [
             {
               data: [40, 25, 20, 15],
-              backgroundColor: ["#FFC107", "#FFE082", "#FFECB3", "#ffe4c4"],
+              backgroundColor: [
+                darkPalette.primary,
+                darkPalette.secondary,
+                darkPalette.tertiary,
+                darkPalette.quaternary,
+              ],
               borderWidth: 0,
             },
           ],
@@ -131,7 +167,12 @@ const Charts = () => {
           datasets: [
             {
               data: [30, 30, 30, 10],
-              backgroundColor: ["#FFC107", "#FFE082", "#FFECB3", "#ffe4c4"],
+              backgroundColor: [
+                darkPalette.primary,
+                darkPalette.secondary,
+                darkPalette.tertiary,
+                darkPalette.quaternary,
+              ],
               borderWidth: 0,
             },
           ],
@@ -143,7 +184,12 @@ const Charts = () => {
           datasets: [
             {
               data: [60, 25, 10, 5],
-              backgroundColor: ["#FFC107", "#FFE082", "#FFECB3", "#ffe4c4"],
+              backgroundColor: [
+                darkPalette.primary,
+                darkPalette.secondary,
+                darkPalette.tertiary,
+                darkPalette.quaternary,
+              ],
               borderWidth: 0,
             },
           ],
@@ -153,7 +199,12 @@ const Charts = () => {
           datasets: [
             {
               data: [55, 30, 10, 5],
-              backgroundColor: ["#FFC107", "#FFE082", "#FFECB3", "#ffe4c4"],
+              backgroundColor: [
+                darkPalette.primary,
+                darkPalette.secondary,
+                darkPalette.tertiary,
+                darkPalette.quaternary,
+              ],
               borderWidth: 0,
             },
           ],
@@ -163,7 +214,12 @@ const Charts = () => {
           datasets: [
             {
               data: [65, 20, 10, 5],
-              backgroundColor: ["#FFC107", "#FFE082", "#FFECB3", "#ffe4c4"],
+              backgroundColor: [
+                darkPalette.primary,
+                darkPalette.secondary,
+                darkPalette.tertiary,
+                darkPalette.quaternary,
+              ],
               borderWidth: 0,
             },
           ],
@@ -192,7 +248,9 @@ const Charts = () => {
               data: [65, 45, 75, 55, 80, 65, 90, 70, 85, 95],
               backgroundColor: (context) => {
                 const index = context.dataIndex;
-                return index === 6 || index === 9 ? "#FFC107" : "#FFECB3";
+                return index === 6 || index === 9
+                  ? darkPalette.highlight
+                  : darkPalette.secondary;
               },
               borderRadius: 10,
               borderSkipped: false,
@@ -206,7 +264,9 @@ const Charts = () => {
               data: [45, 65, 85, 55, 70, 95, 60],
               backgroundColor: (context) => {
                 const index = context.dataIndex;
-                return index === 2 || index === 5 ? "#FFC107" : "#FFECB3";
+                return index === 2 || index === 5
+                  ? darkPalette.highlight
+                  : darkPalette.secondary;
               },
               borderRadius: 10,
               borderSkipped: false,
@@ -220,7 +280,9 @@ const Charts = () => {
               data: [30, 45, 75, 60, 80, 90, 70, 40],
               backgroundColor: (context) => {
                 const index = context.dataIndex;
-                return index === 4 || index === 5 ? "#FFC107" : "#FFECB3";
+                return index === 4 || index === 5
+                  ? darkPalette.highlight
+                  : darkPalette.secondary;
               },
               borderRadius: 10,
               borderSkipped: false,
@@ -247,7 +309,9 @@ const Charts = () => {
               data: [80, 60, 85, 70, 90, 75, 95, 85, 90, 100],
               backgroundColor: (context) => {
                 const index = context.dataIndex;
-                return index === 6 || index === 9 ? "#FFC107" : "#FFECB3";
+                return index === 6 || index === 9
+                  ? darkPalette.highlight
+                  : darkPalette.secondary;
               },
               borderRadius: 10,
               borderSkipped: false,
@@ -261,7 +325,9 @@ const Charts = () => {
               data: [60, 75, 90, 70, 85, 100, 80],
               backgroundColor: (context) => {
                 const index = context.dataIndex;
-                return index === 2 || index === 5 ? "#FFC107" : "#FFECB3";
+                return index === 2 || index === 5
+                  ? darkPalette.highlight
+                  : darkPalette.secondary;
               },
               borderRadius: 10,
               borderSkipped: false,
@@ -275,7 +341,9 @@ const Charts = () => {
               data: [40, 55, 80, 65, 90, 95, 85, 50],
               backgroundColor: (context) => {
                 const index = context.dataIndex;
-                return index === 4 || index === 5 ? "#FFC107" : "#FFECB3";
+                return index === 4 || index === 5
+                  ? darkPalette.highlight
+                  : darkPalette.secondary;
               },
               borderRadius: 10,
               borderSkipped: false,
@@ -302,7 +370,9 @@ const Charts = () => {
               data: [100, 85, 110, 90, 120, 105, 130, 115, 125, 140],
               backgroundColor: (context) => {
                 const index = context.dataIndex;
-                return index === 6 || index === 9 ? "#FFC107" : "#FFECB3";
+                return index === 6 || index === 9
+                  ? darkPalette.highlight
+                  : darkPalette.secondary;
               },
               borderRadius: 10,
               borderSkipped: false,
@@ -316,7 +386,9 @@ const Charts = () => {
               data: [90, 110, 140, 100, 120, 150, 120],
               backgroundColor: (context) => {
                 const index = context.dataIndex;
-                return index === 2 || index === 5 ? "#FFC107" : "#FFECB3";
+                return index === 2 || index === 5
+                  ? darkPalette.highlight
+                  : darkPalette.secondary;
               },
               borderRadius: 10,
               borderSkipped: false,
@@ -330,7 +402,9 @@ const Charts = () => {
               data: [70, 95, 130, 105, 140, 150, 120, 85],
               backgroundColor: (context) => {
                 const index = context.dataIndex;
-                return index === 4 || index === 5 ? "#FFC107" : "#FFECB3";
+                return index === 4 || index === 5
+                  ? darkPalette.highlight
+                  : darkPalette.secondary;
               },
               borderRadius: 10,
               borderSkipped: false,
@@ -349,10 +423,10 @@ const Charts = () => {
             {
               label: "Growth",
               data: [5000, 22000, 15000, 35000, 20000, 28000],
-              borderColor: "#FFC107",
-              backgroundColor: "rgba(255, 193, 7, 0.2)",
+              borderColor: darkPalette.primary,
+              backgroundColor: "rgba(63, 81, 181, 0.2)",
               tension: 0.4,
-              pointBackgroundColor: "#FFC107",
+              pointBackgroundColor: darkPalette.primary,
               pointBorderColor: "#FFF",
               pointBorderWidth: 2,
               pointRadius: 6,
@@ -365,10 +439,10 @@ const Charts = () => {
             {
               label: "Growth",
               data: [5000, 15000, 10000, 20000, 18000],
-              borderColor: "#FFC107",
-              backgroundColor: "rgba(255, 193, 7, 0.2)",
+              borderColor: darkPalette.primary,
+              backgroundColor: "rgba(63, 81, 181, 0.2)",
               tension: 0.4,
-              pointBackgroundColor: "#FFC107",
+              pointBackgroundColor: darkPalette.primary,
               pointBorderColor: "#FFF",
               pointBorderWidth: 2,
               pointRadius: 6,
@@ -381,10 +455,10 @@ const Charts = () => {
             {
               label: "Growth",
               data: [2000, 4000, 3000, 5000, 4500, 6000, 4000],
-              borderColor: "#FFC107",
-              backgroundColor: "rgba(255, 193, 7, 0.2)",
+              borderColor: darkPalette.primary,
+              backgroundColor: "rgba(63, 81, 181, 0.2)",
               tension: 0.4,
-              pointBackgroundColor: "#FFC107",
+              pointBackgroundColor: darkPalette.primary,
               pointBorderColor: "#FFF",
               pointBorderWidth: 2,
               pointRadius: 6,
@@ -399,10 +473,10 @@ const Charts = () => {
             {
               label: "Growth",
               data: [8000, 25000, 18000, 40000, 30000, 45000],
-              borderColor: "#FFC107",
-              backgroundColor: "rgba(255, 193, 7, 0.2)",
+              borderColor: darkPalette.primary,
+              backgroundColor: "rgba(63, 81, 181, 0.2)",
               tension: 0.4,
-              pointBackgroundColor: "#FFC107",
+              pointBackgroundColor: darkPalette.primary,
               pointBorderColor: "#FFF",
               pointBorderWidth: 2,
               pointRadius: 6,
@@ -415,10 +489,10 @@ const Charts = () => {
             {
               label: "Growth",
               data: [8000, 18000, 12000, 25000, 22000],
-              borderColor: "#FFC107",
-              backgroundColor: "rgba(255, 193, 7, 0.2)",
+              borderColor: darkPalette.primary,
+              backgroundColor: "rgba(63, 81, 181, 0.2)",
               tension: 0.4,
-              pointBackgroundColor: "#FFC107",
+              pointBackgroundColor: darkPalette.primary,
               pointBorderColor: "#FFF",
               pointBorderWidth: 2,
               pointRadius: 6,
@@ -431,10 +505,10 @@ const Charts = () => {
             {
               label: "Growth",
               data: [3000, 5000, 4000, 7000, 6000, 8000, 5000],
-              borderColor: "#FFC107",
-              backgroundColor: "rgba(255, 193, 7, 0.2)",
+              borderColor: darkPalette.primary,
+              backgroundColor: "rgba(63, 81, 181, 0.2)",
               tension: 0.4,
-              pointBackgroundColor: "#FFC107",
+              pointBackgroundColor: darkPalette.primary,
               pointBorderColor: "#FFF",
               pointBorderWidth: 2,
               pointRadius: 6,
@@ -449,10 +523,10 @@ const Charts = () => {
             {
               label: "Growth",
               data: [10000, 30000, 20000, 50000, 40000, 60000],
-              borderColor: "#FFC107",
-              backgroundColor: "rgba(255, 193, 7, 0.2)",
+              borderColor: darkPalette.primary,
+              backgroundColor: "rgba(63, 81, 181, 0.2)",
               tension: 0.4,
-              pointBackgroundColor: "#FFC107",
+              pointBackgroundColor: darkPalette.primary,
               pointBorderColor: "#FFF",
               pointBorderWidth: 2,
               pointRadius: 6,
@@ -465,10 +539,10 @@ const Charts = () => {
             {
               label: "Growth",
               data: [10000, 22000, 15000, 30000, 25000],
-              borderColor: "#FFC107",
-              backgroundColor: "rgba(255, 193, 7, 0.2)",
+              borderColor: darkPalette.primary,
+              backgroundColor: "rgba(63, 81, 181, 0.2)",
               tension: 0.4,
-              pointBackgroundColor: "#FFC107",
+              pointBackgroundColor: darkPalette.primary,
               pointBorderColor: "#FFF",
               pointBorderWidth: 2,
               pointRadius: 6,
@@ -481,10 +555,10 @@ const Charts = () => {
             {
               label: "Growth",
               data: [4000, 7000, 5000, 9000, 8000, 11000, 7000],
-              borderColor: "#FFC107",
-              backgroundColor: "rgba(255, 193, 7, 0.2)",
+              borderColor: darkPalette.primary,
+              backgroundColor: "rgba(63, 81, 181, 0.2)",
               tension: 0.4,
-              pointBackgroundColor: "#FFC107",
+              pointBackgroundColor: darkPalette.primary,
               pointBorderColor: "#FFF",
               pointBorderWidth: 2,
               pointRadius: 6,
@@ -536,7 +610,9 @@ const Charts = () => {
         variant="light"
         className="w-100 text-start border d-flex align-items-center"
       >
-        <span>⚡</span> {value}
+        <AiFillThunderbolt style={{ color: "#4ED7F1" }} className="mx-1 mt-1" />
+
+        {value}
       </Dropdown.Toggle>
       <Dropdown.Menu>
         {options.map((option) => (
@@ -551,28 +627,43 @@ const Charts = () => {
   return (
     <div className="min-vh-100">
       {/* Global filter controls - Now in top right */}
-      <Container fluid className="py-2">
+      <Container fluid>
         <Row>
           <Col md={12} className="d-flex justify-content-start">
-            <Card className="shadow-sm rounded-4 border-0">
-              <Card.Body className="p-3">
-                <div className="d-flex align-items-center">
-                  <h6 className="mb-0 me-3">Dashboard Controls</h6>
-                  <div className="me-3" style={{ width: "9rem" }}>
-                    <FilterDropdown
-                      title="Time Range"
-                      value={timeRange}
-                      options={["Daily", "Weekly", "Monthly"]}
-                      onChange={setTimeRange}
-                    />
-                  </div>
-                  <div style={{ width: "9rem" }}>
-                    <FilterDropdown
-                      title="Metric Type"
-                      value={metricType}
-                      options={["Engagement", "Reach", "Impressions"]}
-                      onChange={setMetricType}
-                    />
+            <Card
+              className="border-0"
+              style={{ backgroundColor: "#EFF1F5", borderRadius: "2rem" }}
+            >
+              <Card.Body className="p-3 p-md-4">
+                <div className="d-flex flex-column flex-md-row align-items-md-center gap-3">
+                  <h6 className="mb-2 mb-md-0 fw-semibold text-black">
+                    Dashboard Controls
+                  </h6>
+                  <div className="d-flex flex-wrap gap-3">
+                    <div
+                      className="flex-grow-1"
+                      style={{ minWidth: "140px", maxWidth: "200px" }}
+                    >
+                      <FilterDropdown
+                        title="Time Range"
+                        value={timeRange}
+                        options={["Daily", "Weekly", "Monthly"]}
+                        onChange={setTimeRange}
+                        className="w-100"
+                      />
+                    </div>
+                    <div
+                      className="flex-grow-1"
+                      style={{ minWidth: "140px", maxWidth: "200px" }}
+                    >
+                      <FilterDropdown
+                        title="Metric Type"
+                        value={metricType}
+                        options={["Engagement", "Reach", "Impressions"]}
+                        onChange={setMetricType}
+                        className="w-100"
+                      />
+                    </div>
                   </div>
                 </div>
               </Card.Body>
@@ -583,7 +674,10 @@ const Charts = () => {
         <Row className="mt-3">
           {/* Overview */}
           <Col md={12} lg={4} className="mb-3 mt-5">
-            <Card className="shadow-sm rounded-4 border-0">
+            <Card
+              className="shadow-sm rounded-4 border-0"
+              style={{ backgroundColor: "#FAFAFA" }}
+            >
               <Card.Body className="p-4">
                 <h5 className="mb-5">Overview</h5>
 
@@ -606,7 +700,10 @@ const Charts = () => {
 
           {/* Middle chart - Pie */}
           <Col md={12} lg={8} className="mb-3 ">
-            <Card className="shadow-sm rounded-4 mb-1 border-0">
+            <Card
+              className="shadow-sm rounded-4 mb-1 border-0"
+              style={{ backgroundColor: "#EFF1F5" }}
+            >
               <Card.Body className="p-3">
                 <h5 className="mb-3">
                   {metricType} Distribution - {timeRange}
@@ -626,7 +723,10 @@ const Charts = () => {
         </Row>
         <Row>
           <Col md={12} lg={6}>
-            <Card className="shadow-sm rounded-4 mb-4 border-0 py-4 ">
+            <Card
+              className="shadow-sm rounded-4 mb-4 border-0 py-4 "
+              style={{ backgroundColor: "#EFF1F5" }}
+            >
               <Card.Body className="p-4 ">
                 <h5 className="mb-3">
                   {metricType} Trends - {timeRange}
@@ -642,7 +742,10 @@ const Charts = () => {
 
           {/* Growth Chart - Line */}
           <Col md={12} lg={6} className="mt-4">
-            <Card className="shadow-sm rounded-4 mb-4 border-0">
+            <Card
+              className="shadow-sm rounded-4 mb-4 border-0"
+              style={{ backgroundColor: "#FAFAFA" }}
+            >
               <Card.Body className="p-4">
                 <h5 className="mb-3">
                   {metricType} Growth - {timeRange}
