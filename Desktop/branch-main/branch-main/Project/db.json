@@ -1,0 +1,257 @@
+{
+  "overview": {
+    "totalFollowers": 2310000,
+    "followerGrowth": {
+      "count": 25300,
+      "percentage": 2.5
+    },
+    "engagementRate": {
+      "current": 5.4,
+      "change": -1.2
+    },
+    "postsPublished": 90,
+    "topPerformingPlatform": {
+      "name": "TikTok",
+      "followers": 1200000,
+      "growthRate": 8.3
+    }
+  },
+  "competitors": [
+    {
+      "id": 1,
+      "name": "Competitor Alpha",
+      "avatar": "./src/assets/images/myPhoto.png",
+      "followers": "1.2M",
+      "likesPerDay": 1500,
+      "commentsPerDay": 250,
+      "sharesPerDay": 80,
+      "postsPerWeek": 5,
+      "samplePost": {
+        "reactions": [
+          { "id": "r1", "emoji": "👍" },
+          { "id": "r2", "emoji": "❤️" },
+          { "id": "r3", "emoji": "🔥" }
+        ],
+        "likesCount": 187,
+        "commentsCount": 98,
+        "sharesCount": 45,
+        "content": "Working on a publication for a continuous series of amazing post series. <strong>Part 1 coming soon!</strong> Stay tuned!",
+        "timestamp": "2 hours ago"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Beta Brands",
+      "avatar": "/images/competitorB.png",
+      "followers": "850K",
+      "likesPerDay": 980,
+      "commentsPerDay": 180,
+      "sharesPerDay": 60,
+      "postsPerWeek": 3,
+      "samplePost": {
+        "reactions": [
+          { "id": "r1", "emoji": "👍" },
+          { "id": "r2", "emoji": "💡" }
+        ],
+        "likesCount": 150,
+        "commentsCount": 65,
+        "sharesCount": 30,
+        "content": "Exploring new market trends! Fascinating insights emerging.",
+        "timestamp": "Yesterday"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Gamma Group",
+      "avatar": "/assets/images/face.png",
+      "followers": "500K",
+      "likesPerDay": 750,
+      "commentsPerDay": 150,
+      "sharesPerDay": 40,
+      "postsPerWeek": 4,
+      "samplePost": {
+        "reactions": [
+          { "id": "r1", "emoji": "🚀" },
+          { "id": "r2", "emoji": "👍" }
+        ],
+        "likesCount": 120,
+        "commentsCount": 50,
+        "sharesCount": 25,
+        "content": "Launched our new initiative today! Check out the details on our blog.",
+        "timestamp": "5 hours ago"
+      }
+    }
+  ],
+  "platforms": [
+    {
+      "id": "facebook",
+      "followers": "280K",
+      "likes": "124K",
+      "comments": "231K",
+      "shares": "124K",
+      "growth": "+19.9%",
+      "barData": [40, 70, 90, 70, 30, 60, 40]
+    },
+    {
+      "id": "instagram",
+      "followers": "680K",
+      "likes": "234K",
+      "comments": "345K",
+      "shares": "234K",
+      "growth": "+25.5%",
+      "barData": [60, 80, 100, 80, 50, 70, 60]
+    },
+    {
+      "id": "twitter",
+      "followers": "50K",
+      "likes": "345K",
+      "comments": "456K",
+      "shares": "345K",
+      "growth": "+10.2%",
+      "barData": [20, 40, 60, 40, 20, 50, 30]
+    },
+    {
+      "id": "linkedin",
+      "followers": "100K",
+      "likes": "456K",
+      "comments": "567K",
+      "shares": "456K",
+      "growth": "+15.3%",
+      "barData": [30, 50, 70, 50, 30, 60, 40]
+    },
+    {
+      "id": "tiktok",
+      "followers": "1.2M",
+      "likes": "5678K",
+      "comments": "6789K",
+      "shares": "5678K",
+      "growth": "+30.7%",
+      "barData": [100, 150, 200, 150, 100, 180, 120]
+    }
+  ],
+  "facebookInsights": {
+    "title": "Facebook Followers",
+    "growthPercentage": 19.9,
+    "metrics": [],
+    "monthlyData": []
+  },
+  "engagementDistribution": {
+    "title": "Engagement Distribution - Monthly",
+    "data": [
+      { "name": "Likes", "percentage": 25 },
+      { "name": "Comments", "percentage": 25 },
+      { "name": "Shares", "percentage": 25 },
+      { "name": "Follow", "percentage": 25 }
+    ]
+  },
+  "engagementTrends": {
+    "title": "Engagement Trends - Monthly",
+    "data": [
+      { "month": "Jan", "value": 22000 },
+      { "month": "Feb", "value": 17000 },
+      { "month": "Mar", "value": 25000 },
+      { "month": "Apr", "value": 19000 },
+      { "month": "May", "value": 27000 },
+      { "month": "Jun", "value": 23000 },
+      { "month": "Jul", "value": 21000 },
+      { "month": "Aug", "value": 26000 },
+      { "month": "Sep", "value": 28000 },
+      { "month": "Oct", "value": 32000 }
+    ]
+  },
+  "engagementGrowth": {
+    "title": "Engagement Growth - Monthly",
+    "data": [
+      { "year": 2020, "value": 5000 },
+      { "year": 2021, "value": 22000 },
+      { "year": 2022, "value": 15000 },
+      { "year": 2023, "value": 35000 },
+      { "year": 2024, "value": 20000 },
+      { "year": 2025, "value": 28000 }
+    ]
+  },
+  "audienceCountries": [
+    { "name": "USA", "percentage": 35 },
+    { "name": "UK", "percentage": 25 },
+    { "name": "Egypt", "percentage": 15 }
+  ],
+  "audienceAges": [
+    { "range": "18-24", "percentage": 35 },
+    { "range": "25-34", "percentage": 25 },
+    { "range": "35-44", "percentage": 15 }
+  ],
+  "audienceActivity": [
+    { "time": "10Am-2pm", "percentage": 35 },
+    { "time": "6Pm-9pm", "percentage": 25 }
+  ],
+  "topPosts": [
+    {
+      "id": 1,
+      "author": "Omar Hassan",
+      "profilePic": "/images/profile.png",
+      "date": "6 Feb at 19:36",
+      "content": "Success is not a destination...",
+      "platform": "Facebook",
+      "engagement": {
+        "likes": 210,
+        "comments": 36,
+        "shares": 12,
+        "reactions": ["like", "love", "wow"]
+      }
+    },
+    {
+      "id": 2,
+      "author": "Omar Hassan",
+      "profilePic": "/images/profile.png",
+      "date": "2 Feb at 14:22",
+      "content": "Ambition is the spark...",
+      "platform": "Facebook",
+      "engagement": {
+        "likes": 210,
+        "comments": 35,
+        "shares": 12,
+        "reactions": ["like", "love", "wow"]
+      }
+    },
+    {
+      "id": 3,
+      "author": "Omar Hassan",
+      "profilePic": "/images/profile.png",
+      "date": "19 Sep at 20:22",
+      "content": "Building yourself starts...",
+      "platform": "Facebook",
+      "engagement": {
+        "likes": 210,
+        "comments": 35,
+        "shares": 12,
+        "reactions": ["like", "love", "wow"]
+      }
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "title": "Instagram Followers reaches 100k 🤩 🔥",
+      "message": "Congratulations! 🎉 You've just hit 100,000 followers on Instagram!",
+      "date": "12 Feb",
+      "read": false,
+      "type": "milestone"
+    },
+    {
+      "id": 2,
+      "title": "YouTube subscription rate has increased by 20%",
+      "message": "Your YouTube channel's subscription rate has increased...",
+      "date": "27 Jun",
+      "read": false,
+      "type": "growth"
+    },
+    {
+      "id": 3,
+      "title": "Your Post is on Fire! 🔥",
+      "message": "Your latest post just hit 2,000 likes on Facebook!",
+      "date": "2 Jun",
+      "read": false,
+      "type": "engagement"
+    }
+  ]
+}
