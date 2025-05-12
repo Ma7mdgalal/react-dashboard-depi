@@ -56,7 +56,7 @@ function Navbar() {
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
                         style={{
-                          fontSize: "clamp(.5rem, 1.5vw, 1.05rem)",
+                          fontSize: "clamp(1.05rem, 1.5vw, 1.05rem)",
                           borderBottom: isDropdownActive
                             ? "2px solid #4ED7F1"
                             : "none",

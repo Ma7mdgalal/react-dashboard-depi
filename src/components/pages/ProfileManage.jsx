@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; // Added useEffect for potential resize handling
+import { useState} from "react";
 import {
   Container,
   Row,
@@ -17,7 +17,8 @@ import {
   faTiktok,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
-import myPic from "@images/myPhoto.png"; // Ensure this path is correct
+
+import myPic from "@images/myPhoto.png";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

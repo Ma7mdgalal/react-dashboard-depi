@@ -46,6 +46,7 @@ const Charts = () => {
   const chartOptions = {
     bar: {
       responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
         tooltip: { enabled: true },
@@ -57,11 +58,13 @@ const Charts = () => {
     },
     pie: {
       responsive: true,
+      maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       cutout: "0%",
     },
     line: {
       responsive: true,
+      maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: {
         x: { grid: { display: false } },
@@ -252,8 +255,9 @@ const Charts = () => {
                   ? darkPalette.highlight
                   : darkPalette.secondary;
               },
-              borderRadius: 10,
+              borderRadius: 6,
               borderSkipped: false,
+              barThickness: 20,
             },
           ],
         },
@@ -603,6 +607,21 @@ const Charts = () => {
     });
   }, [timeRange, metricType]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      // Force chart update on window resize
+      const event = new Event("resize");
+      window.dispatchEvent(event);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Clean up
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   // Common dropdown component to reduce repetition
   const FilterDropdown = ({ title, value, options, onChange }) => (
     <Dropdown>
@@ -694,7 +713,7 @@ const Charts = () => {
           </Col>
 
           {/* Middle chart - Pie */}
-          <Col md={12} lg={8} className="mb-3 ">
+          <Col md={12} lg={8} className="mb-3">
             <Card
               className="shadow-sm rounded-4 mb-1 border-0"
               style={{ backgroundColor: "#EFF1F5" }}
@@ -705,7 +724,7 @@ const Charts = () => {
                 </h5>
                 <div
                   className="d-flex justify-content-center"
-                  style={{ height: "13rem" }}
+                  style={{ height: "18rem" }}
                 >
                   {chartData.pie.labels && (
                     <Pie data={chartData.pie} options={chartOptions.pie} />
@@ -717,16 +736,16 @@ const Charts = () => {
           </Col>
         </Row>
         <Row>
-          <Col md={12} lg={6}>
+          <Col md={12} lg={6} className="mt-4">
             <Card
-              className="shadow-sm rounded-4 mb-4 border-0 py-4 "
+              className="shadow-sm rounded-4 mb-4 border-0 "
               style={{ backgroundColor: "#EFF1F5" }}
             >
-              <Card.Body className="p-4 ">
+              <Card.Body className="p-4">
                 <h5 className="mb-3">
                   {metricType} Trends - {timeRange}
                 </h5>
-                <div style={{ height: "15rem" }}>
+                <div style={{ height: "300px", width: "100%" }}>
                   {chartData.bar.labels && (
                     <Bar data={chartData.bar} options={chartOptions.bar} />
                   )}
@@ -745,7 +764,7 @@ const Charts = () => {
                 <h5 className="mb-3">
                   {metricType} Growth - {timeRange}
                 </h5>
-                <div style={{ height: "15rem" }}>
+                <div style={{ height: "300px", width: "100%" }}>
                   {chartData.line.labels && (
                     <Line data={chartData.line} options={chartOptions.line} />
                   )}
