@@ -76,7 +76,7 @@ function SignUp() {
   };
 
   if (redirect) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/login" />;
   }
 
   return (

@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI  "mongodb://127.0.0.1:27017/users", {
+mongoose.connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/users", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -67,7 +67,7 @@ app.post("/login", async (req, res) => {
 });
 
 // Start server
-const PORT = process.env.PORT  3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  console.log(Server is running on port ${PORT});
+  console.log(`Server is running on port ${PORT}`);
 });
