@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "@shared/Navbar";
 import Dashboard from "@pages/Dashboard";
 import Analytics from "@pages/Analytics";
@@ -11,25 +11,27 @@ import SignUp from "@pages/SignUp";
 import Login from "@pages/Login";
 import Landing from "./components/pages/Landing";
 import Selections from "./components/pages/Selections";
-function App() {
-  const hideNavbarPaths = ["/", "/signup", "/login", "/selections"];
 
-  const shouldHideNavbar = hideNavbarPaths.includes(location.pathname);
+function App() {
+  const location = useLocation();
+  const hideNavbarPaths = ["/", "/signup", "/login", "/selections"];
+  const shouldHideNavbar = hideNavbarPaths.includes(
+    location.pathname.toLowerCase()
+  );
 
   return (
     <>
-      {/* Conditionally render Navbar */}
       {!shouldHideNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/Dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/posts" element={<Posts />} />
         <Route path="/competitor" element={<Competitor />} />
         <Route path="/settings/notifications" element={<Settings />} />
         <Route path="/settings/profile" element={<ProfileManage />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/Login" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/selections" element={<Selections />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
