@@ -1,49 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { X, ChevronDown } from "lucide-react";
+import axios from "axios";
 
 function Settings() {
-  const initialNotifications = [
-    {
-      id: 1,
-      title: "Instagram Followers reaches 100k 🤩🔥",
-      content:
-        "Congratulations! 🎉 You've just hit 100,000 followers on Instagram! 🚀✨ Your community is growing, and your impact is stronger than ever. Keep sharing your amazing content! 💙 #100KStrong",
-      date: "12 Feb",
-    },
-    {
-      id: 2,
-      title: "YouTube subscription rate has increased by 20%",
-      content:
-        "Your YouTube channel's subscription rate has increased by 20% in the last month! 🎉 More viewers are loving your content—keep up the great work and keep them engaged! 💡🔥",
-      date: "27 Jun",
-    },
-    {
-      id: 3,
-      title: "Your Post is on Fire! 🔥",
-      content:
-        "Your latest post just hit 2,000 likes on Facebook! 🎉👏 Your audience is loving it—keep sharing amazing content and engaging with your community! 💙",
-      date: "2 Jun",
-    },
-  ];
-
-  const [notifications, setNotifications] = useState(initialNotifications);
-
-  const deleteNotification = (idToDelete) => {
-    setNotifications(
-      notifications.filter((notification) => notification.id !== idToDelete)
-    );
-  };
-
+  const [notifications, setNotifications] = useState([]);
   const [isHovered, setIsHovered] = useState(false);
+
+  // Fetch notifications from JSON server
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/notifications");
+        setNotifications(response.data);
+      } catch (error) {
+        console.error("Error fetching notifications:", error);
+      }
+    };
+    fetchNotifications();
+  }, []);
+
+  // Delete notification
+  const deleteNotification = async (idToDelete) => {
+    try {
+      await axios.delete(`http://localhost:3000/notifications/${idToDelete}`);
+      setNotifications(
+        notifications.filter((notification) => notification.id !== idToDelete)
+      );
+    } catch (error) {
+      console.error("Error deleting notification:", error);
+    }
+  };
 
   const buttonStyle = {
     backgroundColor: isHovered ? "#4ED7F1" : "#EFF1F5",
     fontWeight: "bold",
-    transition: "background-color 0.3s ease-in-out", // Added transition for background-color
+    transition: "background-color 0.3s ease-in-out",
   };
+
   return (
     <div className="container-fluid py-5">
-      {/* Header Section */}
       <div className="d-flex align-items-center mb-4">
         <h2 className="text-black fw-bold mx-auto">
           All Notifications
@@ -63,7 +58,7 @@ function Settings() {
               key={notification.id}
               id={notification.id}
               title={notification.title}
-              content={notification.content}
+              content={notification.message}
               date={notification.date}
               onDelete={deleteNotification}
             />

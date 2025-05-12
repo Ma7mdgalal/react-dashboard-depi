@@ -713,7 +713,7 @@ const Charts = () => {
           </Col>
 
           {/* Middle chart - Pie */}
-          <Col md={12} lg={8} className="mb-3">
+          <Col md={12} lg={8}>
             <Card
               className="shadow-sm rounded-4 mb-1 border-0"
               style={{ backgroundColor: "#EFF1F5" }}
@@ -724,7 +724,7 @@ const Charts = () => {
                 </h5>
                 <div
                   className="d-flex justify-content-center"
-                  style={{ height: "18rem" }}
+                  style={{ height: "14rem" }}
                 >
                   {chartData.pie.labels && (
                     <Pie data={chartData.pie} options={chartOptions.pie} />
@@ -745,7 +745,7 @@ const Charts = () => {
                 <h5 className="mb-3">
                   {metricType} Trends - {timeRange}
                 </h5>
-                <div style={{ height: "300px", width: "100%" }}>
+                <div style={{ height: "15rem", width: "100%" }}>
                   {chartData.bar.labels && (
                     <Bar data={chartData.bar} options={chartOptions.bar} />
                   )}
@@ -764,7 +764,7 @@ const Charts = () => {
                 <h5 className="mb-3">
                   {metricType} Growth - {timeRange}
                 </h5>
-                <div style={{ height: "300px", width: "100%" }}>
+                <div style={{ height: "15rem", width: "100%" }}>
                   {chartData.line.labels && (
                     <Line data={chartData.line} options={chartOptions.line} />
                   )}

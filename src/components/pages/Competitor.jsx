@@ -23,7 +23,7 @@ const Competitor = () => {
     setLoading(true);
     setError(null);
     axios
-      .get("http://localhost:3001/competitors")
+      .get("http://localhost:3000/competitors")
       .then((res) => {
         setCompetitorsData(res.data);
       })

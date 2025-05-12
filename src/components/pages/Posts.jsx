@@ -50,9 +50,9 @@ function Posts() {
   useEffect(() => {
     // --- Fetch Audience Insights ---
     Promise.all([
-      axios.get("http://localhost:3001/audienceCountries"),
-      axios.get("http://localhost:3001/audienceAges"),
-      axios.get("http://localhost:3001/audienceActivity"),
+      axios.get("http://localhost:3000/audienceCountries"),
+      axios.get("http://localhost:3000/audienceAges"),
+      axios.get("http://localhost:3000/audienceActivity"),
     ])
       .then(([countriesRes, agesRes, activityRes]) => {
         setAudienceCountries(countriesRes.data);
@@ -64,7 +64,7 @@ function Posts() {
     // --- Fetch Top Posts ---
     const fetchTopPosts = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/topPosts");
+        const response = await axios.get("http://localhost:3000/topPosts");
         // Directly set state (potential risk if component unmounts quickly)
         setTopPosts(response.data);
       } catch (err) {
@@ -268,103 +268,98 @@ function Posts() {
           </div>
 
           {/* Top 3 Posts Sidebar */}
-          <div className="col-md-6 col-lg-4 col-xl-3 d-flex py-4 align-items-center ">
+          <div className="col-md-6 col-lg-4 col-xl-3 d-flex py-5 px-4">
             <Card
-              className="rounded-4 shadow border-0 m-1 d-flex flex-column h-100"
+              className="rounded-4 shadow border-0 d-flex flex-column w-100"
               style={{ backgroundColor: "#EFF1F5" }}
             >
-              <Card.Body className="p-4 d-flex flex-column flex-grow-1 m-0">
+              <Card.Body className="p-4 d-flex flex-column h-100">
                 <div className="d-flex justify-content-between align-items-center mb-4 flex-shrink-0">
                   <h5 className="text-black fw-bold m-0 pe-2">Top 3 posts</h5>{" "}
                   {renderDropdown()}
                 </div>
 
-                <div
-                  className="flex-grow-1"
-                  style={{ overflowY: "auto", minHeight: "150px" }}
-                >
-                  {
-                    topPosts.length > 0 ? (
-                      topPosts.map((post, index) => (
-                        <div
-                          key={post.id}
-                          className={`${
-                            index < topPosts.length - 1 ? "mb-4" : ""
-                          }`}
+                <div className="flex-grow-1 overflow-auto">
+                  {topPosts.length > 0 ? (
+                    topPosts.map((post, index) => (
+                      <div
+                        key={post.id}
+                        className={`${
+                          index < topPosts.length - 1 ? "mb-4" : ""
+                        }`}
+                      >
+                        <Card
+                          className="border-0 rounded-4"
+                          style={{ backgroundColor: "#F5F5F5" }}
                         >
-                          <Card
-                            className="border-0 rounded-4"
-                            style={{ backgroundColor: "#F5F5F5" }}
-                          >
-                            <Card.Body className="p-3">
-                              <div className="d-flex justify-content-between align-items-start mb-2">
-                                <div className="d-flex align-items-center">
-                                  <div className="me-2 flex-shrink-0">
-                                    <img
-                                      src={post.profilePic || Photo}
-                                      alt={`${post.author || "User"} Profile`}
-                                      className="rounded-circle"
-                                      style={{
-                                        width: "40px",
-                                        height: "40px",
-                                        objectFit: "cover",
-                                        border: "2px solid #4ED7F1",
-                                        backgroundColor: "#E0E0E0",
-                                      }}
-                                      onError={(e) => {
-                                        if (e.target.src !== Photo) {
-                                          e.target.onerror = null;
-                                          e.target.src = Photo;
-                                        }
-                                      }}
-                                    />
-                                  </div>
-                                  <div className="flex-grow-1">
-                                    <div className="fw-bold small">
-                                      {post.author}
-                                    </div>
-                                    <div className="text-secondary x-small">
-                                      {post.date}
-                                    </div>
-                                  </div>
+                          <Card.Body className="p-3">
+                            <div className="d-flex justify-content-between align-items-start mb-2">
+                              <div className="d-flex align-items-center">
+                                <div className="me-2 flex-shrink-0">
+                                  <img
+                                    src={post.profilePic || Photo}
+                                    alt={`${post.author || "User"} Profile`}
+                                    className="rounded-circle"
+                                    style={{
+                                      width: "40px",
+                                      height: "40px",
+                                      objectFit: "cover",
+                                      border: "2px solid #4ED7F1",
+                                      backgroundColor: "#E0E0E0",
+                                    }}
+                                    onError={(e) => {
+                                      if (e.target.src !== Photo) {
+                                        e.target.onerror = null;
+                                        e.target.src = Photo;
+                                      }
+                                    }}
+                                  />
                                 </div>
-                                <div
-                                  style={{ cursor: "pointer" }}
-                                  className="text-secondary"
-                                >
-                                  <ThreeDots />
+                                <div className="flex-grow-1">
+                                  <div className="fw-bold small">
+                                    {post.author}
+                                  </div>
+                                  <div className="text-secondary x-small">
+                                    {post.date}
+                                  </div>
                                 </div>
                               </div>
-                              <p
-                                className="small mb-2"
-                                style={{
-                                  fontSize: "13px",
-                                  lineHeight: "1.4",
-                                  wordBreak: "break-word",
-                                }}
+                              <div
+                                style={{ cursor: "pointer" }}
+                                className="text-secondary"
                               >
-                                {post.content}
-                              </p>
-                              <div className="d-flex justify-content-between align-items-center mt-2">
-                                {renderReactionIcons(post.engagement?.likes)}
-                                <div
-                                  className="text-secondary small"
-                                  style={{ fontSize: "11px" }}
-                                >
-                                  {post.engagement?.comments || 0} comments ·{" "}
-                                  {post.engagement?.shares || 0} shares
-                                </div>
+                                <ThreeDots />
                               </div>
-                            </Card.Body>
-                          </Card>
-                        </div>
-                      ))
-                    ) : (
-                      <p className="text-center text-muted pt-5">
-                        Loading posts...
-                      </p>
-                    ) // Or "No posts available."
-                  }
+                            </div>
+                            <p
+                              className="small mb-2"
+                              style={{
+                                fontSize: "13px",
+                                lineHeight: "1.4",
+                                wordBreak: "break-word",
+                              }}
+                            >
+                              {post.content}
+                            </p>
+                            <div className="d-flex justify-content-between align-items-center mt-2">
+                              {renderReactionIcons(post.engagement?.likes)}
+                              <div
+                                className="text-secondary small"
+                                style={{ fontSize: "11px" }}
+                              >
+                                {post.engagement?.comments || 0} comments ·{" "}
+                                {post.engagement?.shares || 0} shares
+                              </div>
+                            </div>
+                          </Card.Body>
+                        </Card>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-center text-muted pt-5">
+                      Loading posts...
+                    </p>
+                  )}
                 </div>
               </Card.Body>
             </Card>

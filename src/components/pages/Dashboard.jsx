@@ -88,7 +88,7 @@ const MainDashboard = () => {
   const [selectedPlatformId, setSelectedPlatformId] = useState("facebook");
 
   useEffect(() => {
-    axios.get("http://localhost:3001/platforms").then((response) => {
+    axios.get("http://localhost:3000/platforms").then((response) => {
       setPlatforms(response.data);
     });
   }, []);
